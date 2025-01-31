@@ -47,3 +47,13 @@ export class NotFoundError extends CustomError {
     Object.setPrototypeOf(this, BadRequestError.prototype);
   }
 }
+
+export class InternalServerError extends CustomError {
+  statusCode = 500;
+
+  constructor(public message: string) {
+    super(message);
+
+    Object.setPrototypeOf(this, BadRequestError.prototype);
+  }
+}
