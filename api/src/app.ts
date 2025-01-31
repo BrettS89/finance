@@ -1,7 +1,7 @@
 import 'express-async-errors';
 import express from 'express';
 import cors from 'cors';
-import helmet from 'helmet';
+// import helmet from 'helmet';
 import { errorHandler } from './middleware/error-handler';
 import { NotFoundError } from './errors';
 
@@ -13,7 +13,7 @@ const app = express();
 
 app.use(express.json());
 app.use(cors());
-app.use(helmet());
+// app.use(helmet());
 
 app.use(expenseTypeRouter);
 app.use(expenseRouter);
