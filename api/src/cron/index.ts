@@ -55,7 +55,7 @@ export const clearWeeklyExpenses = new CronJob(
 export const clearMonthlyExpenses = new CronJob(
   '0 0 1 * *',
   async function() {
-    await deleteExpenses('week');
+    await deleteExpenses('month');
   },
   null,
   false,
@@ -65,7 +65,7 @@ export const clearMonthlyExpenses = new CronJob(
 export const clearAnnualExpenses = new CronJob(
   '0 0 1 1 *',
   async function() {
-    await deleteExpenses('week');
+    await deleteExpenses('year');
   },
   null,
   false,
