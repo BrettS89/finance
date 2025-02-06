@@ -4,13 +4,13 @@ import { db } from '../../storage/db';
 import { ExpenseTypeCreate, expenseTypeCreateSchema, expenseTypePatchSchema, ExpenseTypeModel, ExpenseTypePatch } from './schemas';
 import { BadRequestError } from '../../errors';
 
-export class ExpenseTypeService implements IService  {
+export class ExpenseTypeService implements IService<ExpenseTypeCreate, ExpenseTypePatch, ExpenseTypeModel>  {
   async get(id: string) {
-    return db.table('expense-type').getById(id);
+    return db.table('expense-type').getById<ExpenseTypeModel | null>(id);
   }
 
   async find() {
-    return db.table('expense-type').find();
+    return db.table('expense-type').find<ExpenseTypeModel>();
   }
 
   async create(data: ExpenseTypeCreate) {
@@ -32,10 +32,10 @@ export class ExpenseTypeService implements IService  {
       throw new BadRequestError('invalid request data');
     }
 
-    return db.table('expense-type').findByIdAndUpdate(id, data);
+    return db.table('expense-type').findByIdAndUpdate<ExpenseTypePatch, ExpenseTypeModel>(id, data);
   }
 
   async delete(id: string) {
-    return db.table('expense-type').remove(id);
+    return db.table('expense-type').remove<ExpenseTypeModel>(id);
   }
 }

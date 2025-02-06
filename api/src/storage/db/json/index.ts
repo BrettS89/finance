@@ -43,10 +43,10 @@ class JsonDbTable implements Table {
     return document as T
   }
 
-  async find() {
+  async find<T>(): Promise<T[]> {
     const documents = await this.getDataFromTable(this.name)
 
-    return documents.sort((a, b) => a.createdAt - b.createdAt);
+    return documents.sort((a, b) => a.createdAt - b.createdAt) as T[];
   }
 
   async create<T>(data: Record<string, any>): Promise<T> {
@@ -67,7 +67,7 @@ class JsonDbTable implements Table {
     return document as T
   }
 
-  async findByIdAndUpdate(id: string, data: Record<string, any>) {
+  async findByIdAndUpdate<D, T>(id: string, data: D): Promise<T> {
     const obj = await this.getData()
 
     const documents = obj[this.name]
@@ -92,7 +92,7 @@ class JsonDbTable implements Table {
         return updatedDocument
       }
 
-      return d
+      return d as T;
     })
 
     obj[this.name] = updatedDocuments
@@ -102,7 +102,7 @@ class JsonDbTable implements Table {
     return updatedDocument
   }
 
-  async remove(id: string) {
+  async remove<T>(id: string) {
     const obj = await this.getData()
 
     const documents = obj[this.name]
@@ -123,7 +123,7 @@ class JsonDbTable implements Table {
 
     await fs.writeFile('./src/storage/db/json/data.json', JSON.stringify(obj))
 
-    return document
+    return document as T;
   }
 }
 

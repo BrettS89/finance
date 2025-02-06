@@ -5,6 +5,7 @@ export type ExpenseModel = {
   name: string;
   amount: number;
   expenseTypeId: string;
+  createdAt: string;
 }
 
 export type ExpenseCreate = {

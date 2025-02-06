@@ -3,6 +3,7 @@ import { AnySchema } from 'ajv';
 export type SurplusModel = {
   id: string;
   amount: number;
+  createdAt: string;
 }
 
 export type SurplusCreate = {

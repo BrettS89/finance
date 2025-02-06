@@ -17,7 +17,7 @@ const deleteExpenses = async (frequency: 'week' | 'month' | 'year') => {
     return acc + curr.budget;
   }, 0);
 
-  const ids = expenseTypes.reduce((acc, curr) => {
+  const ids = expenseTypes.reduce((acc: Record<string, boolean>, curr) => {
     acc[curr.id] = true;
     return acc;
   }, {});
@@ -37,7 +37,9 @@ const deleteExpenses = async (frequency: 'week' | 'month' | 'year') => {
 
   if (remaining <= 0) return;
 
-  const surplus = await surplusService.find();
+  const surplusResults = await surplusService.find();
+
+  const surplus = surplusResults[0];
   
   await surplusService.patch(surplus.id, { amount: surplus.amount + remaining });
 };

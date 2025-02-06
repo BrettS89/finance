@@ -4,15 +4,15 @@ import { db } from '../../storage/db';
 import { SurplusCreate, surplusCreateSchema, SurplusModel, SurplusPatch, surplusPatchSchema } from './schemas';
 import { BadRequestError, InternalServerError, NotFoundError } from '../../errors';
 
-export class SurplusService implements IService  {
+export class SurplusService implements IService<SurplusCreate, SurplusPatch, SurplusModel>  {
   private readonly tableName = 'surplus';
 
-  async get(id: string) {
-    return db.table(this.tableName).getById(id);
+  async get(id: string): Promise<SurplusModel | null> {
+    return db.table(this.tableName).getById<SurplusModel>(id);
   }
 
-  async find() {
-    const result = await db.table(this.tableName).find();
+  async find(): Promise<SurplusModel[]> {
+    const result = await db.table(this.tableName).find<SurplusModel>();
 
     if (!result.length) {
       throw new NotFoundError('no surplus exists');
@@ -22,7 +22,7 @@ export class SurplusService implements IService  {
       throw new InternalServerError('more than one surplus found');
     }
 
-    return result[0];
+    return result;
   }
 
   async create(data: SurplusCreate) {
@@ -50,10 +50,10 @@ export class SurplusService implements IService  {
       throw new BadRequestError('invalid request data');
     }
 
-    return db.table(this.tableName).findByIdAndUpdate(id, data);
+    return db.table(this.tableName).findByIdAndUpdate<SurplusPatch, SurplusModel>(id, data);
   }
 
   async delete(id: string) {
-    return db.table(this.tableName).remove(id);
+    return db.table(this.tableName).remove<SurplusModel>(id);
   }
 }

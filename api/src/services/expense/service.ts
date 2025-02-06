@@ -6,15 +6,15 @@ import { BadRequestError } from '../../errors';
 import { ExpenseTypeService } from '../expense-type/service';
 import { SurplusService } from '../surplus/service';
 
-export class ExpenseService implements IService  {
+export class ExpenseService implements IService<ExpenseCreate, ExpensePatch, ExpenseModel>  {
   private readonly tableName = 'expense';
 
   async get(id: string) {
-    return db.table(this.tableName).getById(id);
+    return db.table(this.tableName).getById<ExpenseModel | null>(id);
   }
 
   async find() {
-    return db.table(this.tableName).find();
+    return db.table(this.tableName).find<ExpenseModel>();
   }
 
   async create(data: ExpenseCreate) {
@@ -27,9 +27,13 @@ export class ExpenseService implements IService  {
 
     const created = await db.table(this.tableName).create<ExpenseModel>(data);
 
-    const expenseType = await new ExpenseTypeService().get(created.expenseTypeId) as any;
+    const expenseType = await new ExpenseTypeService().get(created.expenseTypeId);
 
-    const expenses = (await db.table(this.tableName).find())
+    if (!expenseType) {
+      throw new BadRequestError('No expense type found with this id');
+    }
+
+    const expenses = (await db.table(this.tableName).find<ExpenseModel>())
       .filter(expense => expense.expenseTypeId === expenseType.id);
 
     const total = expenses.reduce((acc, curr) => {
@@ -41,7 +45,13 @@ export class ExpenseService implements IService  {
     if (difference < 0) {
       const surplusService = new SurplusService();
 
-      const surplus = await surplusService.find();
+      const surplusResults = await surplusService.find();
+
+      const surplus = surplusResults[0];
+
+      if (!surplus) {
+        throw new Error('No surplus was found');
+      }
 
       if (Math.abs(difference) >= created.amount) {
         await surplusService.patch(surplus.id, { amount: surplus.amount - created.amount });
@@ -61,16 +71,15 @@ export class ExpenseService implements IService  {
       throw new BadRequestError('invalid request data');
     }
 
-    return db.table(this.tableName).findByIdAndUpdate(id, data);
+    return db.table(this.tableName).findByIdAndUpdate<ExpensePatch, ExpenseModel>(id, data);
   }
 
   async delete(id: string) {
-    // if current expenses are over budget, adjust the surplus amount when deleting expense
-    const removed = await db.table(this.tableName).remove(id);
+    const removed = await db.table(this.tableName).remove<ExpenseModel>(id);
 
     const expenseType = await new ExpenseTypeService().get(removed.expenseTypeId) as any;
 
-    const expenses = (await db.table(this.tableName).find())
+    const expenses = (await db.table(this.tableName).find<ExpenseModel>())
       .filter(expense => expense.expenseTypeId === expenseType.id);
 
     const total = expenses.reduce((acc, curr) => {
@@ -85,7 +94,13 @@ export class ExpenseService implements IService  {
 
     const surplusService = new SurplusService();
 
-    const surplus = await surplusService.find();
+    const surplusResults = await surplusService.find();
+
+    const surplus = surplusResults[0];
+
+    if (!surplus) {
+      throw new Error('No surplus was found');
+    }
 
     if (Math.abs(difference) > removed.amount) {
       await surplusService.patch(surplus.id, { amount: surplus.amount + removed.amount });

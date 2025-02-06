@@ -18,7 +18,7 @@ router.get(pathWithId, async (req, res) => {
 
 router.get(path, async (req, res) => {
   const result = await new SurplusService().find();
-  res.status(200).json(result);
+  res.status(200).json(result[0]);
 });
 
 router.patch(pathWithId, async (req, res) => {

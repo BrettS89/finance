@@ -1,11 +1,12 @@
 import { AnySchema } from 'ajv';
 
 export type ExpenseTypeModel = {
-  id: number;
+  id: string;
   name: string;
   frequency: 'week' | 'month' | 'year';
   budget: number;
   description?: string;
+  createdAt: string
 }
 
 export type ExpenseTypeCreate = {
