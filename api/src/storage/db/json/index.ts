@@ -125,6 +125,14 @@ class JsonDbTable implements Table {
 
     return document as T;
   }
+
+  async batchDelete() {
+    const obj = await this.getData()
+
+    obj[this.name] = [];
+
+    await fs.writeFile('./src/storage/db/json/data.json', JSON.stringify(obj))
+  }
 }
 
 export class JsonDb implements Db {

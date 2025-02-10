@@ -31,4 +31,9 @@ router.delete(pathWithId, async (req, res) => {
   res.status(200).json(result);
 });
 
+router.post(`${path}/batch-delete`, async (_, res) => {
+  await new GroceryService().batchDelete();
+  res.status(200).json({ message: 'ok' });
+});
+
 export { router as groceryRouter };

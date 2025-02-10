@@ -1,6 +1,7 @@
 import { http } from './config';
 import { CreateExpenseType, PatchExpenseType } from '../redux/expense-type/slice';
 import { CreateExpense } from '../redux/expense/slice';
+import { CreateGrocery, PatchGrocery } from '../redux/grocery/slice';
 
 export const fetchExpenseTypes = async () => {
   const { data } = await http({
@@ -80,4 +81,52 @@ export const fetchSurplus = async () => {
   });
 
   return data;
+};
+
+// groceries 
+
+export const fetchGroceries = async () => {
+  const { data } = await http({
+    url: '/grocery',
+    method: 'GET',
+  });
+
+  return data;
+};
+
+export const createGrocery = async (payload: CreateGrocery) => {
+  const { data } = await http({
+    url: '/grocery',
+    method: 'POST',
+    data: {
+      ...payload,
+      inCart: false,
+    },
+  });
+
+  return data;
+};
+
+export const deleteGrocery = async (id: string) => {
+  const { data } = await http({
+    url: `/grocery/${id}`,
+    method: 'DELETE',
+  });
+
+  return data;
+};
+
+export const patchGrocery = async (id: string, payload: PatchGrocery) => {
+  const { data } = await http({
+    url: `/grocery/${id}`,
+    method: 'PATCH',
+    data: payload,
+  });
+};
+
+export const batchDeleteGroceries = async () => {
+  await http({
+    url: `/grocery/batch-delete`,
+    method: 'POST',
+  });
 };

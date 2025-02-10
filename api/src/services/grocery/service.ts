@@ -2,7 +2,7 @@ import Ajv from 'ajv';
 import { IService } from '../../types/IService';
 import { db } from '../../storage/db';
 import { GroceryCreate, surplusCreateSchema, GroceryModel, GroceryPatch, surplusPatchSchema } from './schemas';
-import { BadRequestError, InternalServerError, NotFoundError } from '../../errors';
+import { BadRequestError } from '../../errors';
 
 export class GroceryService implements IService<GroceryCreate, GroceryPatch, GroceryModel>  {
   private readonly tableName = 'grocery';
@@ -13,7 +13,6 @@ export class GroceryService implements IService<GroceryCreate, GroceryPatch, Gro
 
   async find(): Promise<GroceryModel[]> {
     const result = await db.table(this.tableName).find<GroceryModel>();
-    console.log(result);
 
     return result;
   }
@@ -24,12 +23,6 @@ export class GroceryService implements IService<GroceryCreate, GroceryPatch, Gro
 
     if (!valid) {
       throw new BadRequestError('invalid request data');
-    }
-
-    const existingSurplus = await db.table(this.tableName).find();
-
-    if (existingSurplus.length > 0) {
-      throw new BadRequestError('Cannot have more than one surplus');
     }
 
     return db.table(this.tableName).create<GroceryModel>(data);
@@ -48,5 +41,9 @@ export class GroceryService implements IService<GroceryCreate, GroceryPatch, Gro
 
   async delete(id: string) {
     return db.table(this.tableName).remove<GroceryModel>(id);
+  }
+
+  async batchDelete(): Promise<void> {
+    return db.table(this.tableName).batchDelete();
   }
 }

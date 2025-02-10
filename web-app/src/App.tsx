@@ -2,15 +2,14 @@ import './App.css';
 import { useEffect, useState } from 'react';
 import { Router } from './routing';
 import { useColorScheme } from '@mui/joy/styles';
-import { colors } from './styles/colors';
-import { TbCurrencyDollar } from "react-icons/tb";
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router';
-import { fetchExpenseTypes, fetchExpenses, fetchSurplus } from './api/calls';
+import { fetchExpenseTypes, fetchExpenses, fetchSurplus, fetchGroceries } from './api/calls';
 import { expenseTypesFetched } from './redux/expense-type/slice';
 import { expensesFetched } from './redux/expense/slice';
 import { surplusFetched } from './redux/surplus/slice';
-import { surplusSelector } from './redux/store';
+import { groceriesFetched } from './redux/grocery/slice';
+import { BottomNav } from './components/bottom-nav';
 
 function App() {
   const [isInitialized, setIsInitialised] = useState<boolean>(false);
@@ -18,13 +17,13 @@ function App() {
   const { setMode } = useColorScheme();
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const surplus = useSelector(surplusSelector);
 
   const loadInitialData = async () => {
     const promises = [
       fetchExpenseTypes(),
       fetchExpenses(),
-      fetchSurplus()
+      fetchSurplus(),
+      fetchGroceries(),
     ];
 
     try {
@@ -32,11 +31,13 @@ function App() {
         expenseTypes,
         expenses,
         surplus,
+        groceries,
       ] = await Promise.all(promises);
   
       dispatch(expenseTypesFetched(expenseTypes));
       dispatch(expensesFetched(expenses));
       dispatch(surplusFetched(surplus));
+      dispatch(groceriesFetched(groceries));
       
       setIsInitialised(true);
       navigate('/expenses');
@@ -47,33 +48,19 @@ function App() {
     }
   };
 
-  const renderSurplusAmount = () => {
-    if (surplus.amount < 0) {
-      return (
-        <span style={{ fontSize: 16, fontWeight: 500, color: colors.red }}>${surplus.amount.toFixed(2)}</span>
-      );
-    }
-
-    return (
-      <span style={{ fontSize: 16, fontWeight: 500, color: colors.green }}>${surplus.amount.toFixed(2)}</span>
-    );
-  }
-
   useEffect(() => {
     setMode('dark');
     loadInitialData();
   }, []);
 
   return (
-    <>
-      <div style={{ textAlign: 'center', display: 'flex',justifyContent: 'space-between', padding: 10, paddingTop: 16, paddingBottom: 16, alignItems: 'center' }}>
-        <TbCurrencyDollar style={{ fontWeight: 700, fontSize: 34, color: colors.green }} />
-        <span style={{ fontSize: 16, fontWeight: 500, color: colors.white }}>Surplus: {renderSurplusAmount()}</span>
-      </div>
+    <div className='app'>
       {isInitialized && (
         <Router/>
       )}
-    </>
+
+      <BottomNav/>
+    </div>
   );
 }
 

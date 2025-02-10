@@ -10,6 +10,7 @@ import { AddExpenseModal } from './add-expense-modal';
 import { colors } from '../../styles/colors';
 import { IoIosAddCircle } from "react-icons/io";
 import { AddExpenseTypeModal } from './add-expense-type-modal';
+import { ExpensesHeader } from './header';
 
 export const Expenses = () => {
   const [viewExpenseModalOpen, setViewExpenseModalOpen] = useState(false);
@@ -88,6 +89,7 @@ export const Expenses = () => {
 
   return (
     <div style={styles.page}>
+      <ExpensesHeader/>
       <div style={{ marginBottom: 10, width: '100%' }}>
         <div style={styles.header}>
           <Typography style={styles.headerText}>
