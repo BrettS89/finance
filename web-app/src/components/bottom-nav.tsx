@@ -59,6 +59,7 @@ const styles = {
   },
   text: {
     fontSize: 14,
+    color: colors.white,
   },
   activeText: {
     fontSize: 14,
