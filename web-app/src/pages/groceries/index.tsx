@@ -5,7 +5,7 @@ import { GroceryHeader } from './header';
 import { GroceryItem } from './item';
 import { AddGroceryModal } from './add-grocery-modal';
 import { ClearGroceryListModal } from './clear-grocery-list-modal';
-import { addGrocery as addGroceryAction, deleteGrocery as deleteGroceryAction, patchGrocery as patchGroceryAction,  batchDeleteGroceries as batchDeleteGroceriesAction } from '../../redux/grocery/slice';
+import { addGrocery as addGroceryAction, deleteGrocery as deleteGroceryAction, patchGrocery as patchGroceryAction,  batchDeleteGroceries as batchDeleteGroceriesAction, fetchGroceries as fetchGroceriesAction } from '../../redux/grocery/slice';
 import { grocerySelector } from '../../redux/store';
 
 export const Groceries = () => {
@@ -41,6 +41,10 @@ export const Groceries = () => {
     setAddGroceryModalIsOpen(false);
   };
 
+  const fetchGroceries = () => {
+    dispatch(fetchGroceriesAction());
+  }
+
   const renderGroceryList = () => {
     return grocery.list.map((item, i) => {
       return (
@@ -60,6 +64,7 @@ export const Groceries = () => {
       <GroceryHeader
         openAddGroceryModal={() => setAddGroceryModalIsOpen(true)}
         openClearGroceryListModal={() => setClearGroceryListModalIsOpen(true)}
+        fetchGroceries={fetchGroceries}
       />
       <div style={styles.groceryList}>
         {renderGroceryList()}

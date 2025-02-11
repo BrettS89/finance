@@ -1,7 +1,23 @@
 import { ListenerEffectAPI } from '@reduxjs/toolkit';
-import { addGrocery, AddGroceryAction, deleteGrocery as deleteGroceryAction, DeleteGroceryAction, groceriesFetched, patchGrocery, PatchGroceryAction, batchDeleteGroceries, BatchDeleteGroceriesAction } from './slice'
+import { addGrocery, AddGroceryAction, deleteGrocery as deleteGroceryAction, DeleteGroceryAction, groceriesFetched, patchGrocery, PatchGroceryAction, batchDeleteGroceries, EmptyAction, fetchGroceries as fetchGroceriesAction } from './slice'
 import { RootStore } from '../store';
 import { createGrocery, deleteGrocery, fetchGroceries, patchGrocery as patchGroceryAPI, batchDeleteGroceries as batchDeleteGroceriesAPI } from '../../api/calls';
+
+export const fetchGroceriesListener = {
+  actionCreator: fetchGroceriesAction,
+  effect: async (action: EmptyAction, listenerApi: ListenerEffectAPI<RootStore, any>) => {
+    try {
+      const groceryList = await fetchGroceries();
+      listenerApi.dispatch(groceriesFetched(groceryList));
+    } catch(e) {
+      if (e instanceof Error) {
+        alert(e.message);
+      } else {
+        alert('Something went wrong.');
+      }
+    }
+  },
+}
 
 export const addGroceryListener = {
   actionCreator: addGrocery,
@@ -42,13 +58,14 @@ export const deleteGroceryListener = {
 
 export const batchDeleteGroceriesListener = {
   actionCreator: batchDeleteGroceries,
-  effect: async (_: BatchDeleteGroceriesAction, listenerApi: ListenerEffectAPI<RootStore, any>) => {
+  effect: async (_: EmptyAction, listenerApi: ListenerEffectAPI<RootStore, any>) => {
     await batchDeleteGroceriesAPI();
     listenerApi.dispatch(groceriesFetched([]));
   },
 };
 
 export const listeners = [
+  fetchGroceriesListener,
   addGroceryListener,
   patchGroceryListener,
   deleteGroceryListener,

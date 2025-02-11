@@ -28,7 +28,7 @@ const initialState: GroceryState = {
 export type AddGroceryAction = PayloadAction<{ data: CreateGrocery, callback: () => void }>;
 export type DeleteGroceryAction = PayloadAction<{ id: string }>;
 export type PatchGroceryAction = PayloadAction<{ id: string; data: PatchGrocery; }>
-export type BatchDeleteGroceriesAction = PayloadAction<void>;
+export type EmptyAction = PayloadAction<void>;
 
 const slice = createSlice({
   name: 'grocery',
@@ -43,12 +43,13 @@ const slice = createSlice({
     groceryDeleted: (state, action: PayloadAction<Grocery>) => {
       state.list = state.list.filter(exp => exp.id !== action.payload.id);
     },
+    fetchGroceries: (_, action: PayloadAction<void>) => {},
     addGrocery: (_, action: AddGroceryAction) => {},
     deleteGrocery: (_, action: DeleteGroceryAction) => {},
     patchGrocery: (_, action: PatchGroceryAction) => {},
-    batchDeleteGroceries: (_, action: BatchDeleteGroceriesAction) => {},
+    batchDeleteGroceries: (_, action: EmptyAction) => {},
   },
 });
 
-export const { groceriesFetched, addGrocery, groceryAdded, deleteGrocery, groceryDeleted, patchGrocery, batchDeleteGroceries } = slice.actions;
+export const { groceriesFetched, addGrocery, groceryAdded, deleteGrocery, groceryDeleted, patchGrocery, batchDeleteGroceries, fetchGroceries } = slice.actions;
 export const groceryReducer = slice.reducer;
