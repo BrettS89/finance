@@ -66,7 +66,7 @@ export const Groceries = () => {
 
   useEffect(() => {
     const interval = setInterval(() => {
-      alert('hi');
+      // alert('hi');
       setTime(Date.now());
     }, 2000);
 
