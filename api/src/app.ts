@@ -21,6 +21,11 @@ app.use(expenseRouter);
 app.use(surplusRouter);
 app.use(groceryRouter);
 
+app.get('/', (_, res) => {
+  console.log('request');
+  res.status(200).json({ message: 'ok' });
+});
+
 app.all("*", async (req, res) => {
   throw new NotFoundError('Path not found');
 });
