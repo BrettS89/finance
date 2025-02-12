@@ -11,15 +11,11 @@ import { grocerySelector } from '../../redux/store';
 export const Groceries = () => {
   const [addGroceryModalIsOpen, setAddGroceryModalIsOpen] = useState<boolean>(false);
   const [clearGroceryListModalIsOpen, setClearGroceryListModalIsOpen] = useState<boolean>(false);
-  const [time, setTime] = useState<number>(Date.now());
-  const [pauseGroceryFetch, setPauseGroceryFetch] = useState<boolean>(false);
 
   const dispatch = useDispatch();
   const grocery = useSelector(grocerySelector);
 
   const addGrocery = (name: string) => {
-    setPauseGroceryFetch(true);
-
     dispatch(addGroceryAction({
       callback: closeAddGroceryModal,
       data: {
@@ -43,7 +39,6 @@ export const Groceries = () => {
 
   const closeAddGroceryModal = () => {
     setAddGroceryModalIsOpen(false);
-    setPauseGroceryFetch(false);
   };
 
   const fetchGroceries = () => {
@@ -63,23 +58,6 @@ export const Groceries = () => {
       )
     });
   };
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      console.log('hi');
-      setTime(Date.now());
-    }, 2000);
-
-    return () => {
-      clearInterval(interval);
-    }
-  }, []);
-
-  useEffect(() => {
-    if (!pauseGroceryFetch) {
-      fetchGroceries();
-    }
-  }, [time]);
 
   return (
     <div style={styles.page}>
