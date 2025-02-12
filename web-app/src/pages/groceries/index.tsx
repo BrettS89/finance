@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { styles } from './styles';
 import { GroceryHeader } from './header';
@@ -11,11 +11,15 @@ import { grocerySelector } from '../../redux/store';
 export const Groceries = () => {
   const [addGroceryModalIsOpen, setAddGroceryModalIsOpen] = useState<boolean>(false);
   const [clearGroceryListModalIsOpen, setClearGroceryListModalIsOpen] = useState<boolean>(false);
+  const [time, setTime] = useState<number>(Date.now());
+  const [pauseGroceryFetch, setPauseGroceryFetch] = useState<boolean>(false);
 
   const dispatch = useDispatch();
   const grocery = useSelector(grocerySelector);
 
   const addGrocery = (name: string) => {
+    setPauseGroceryFetch(true);
+
     dispatch(addGroceryAction({
       callback: closeAddGroceryModal,
       data: {
@@ -39,6 +43,7 @@ export const Groceries = () => {
 
   const closeAddGroceryModal = () => {
     setAddGroceryModalIsOpen(false);
+    setPauseGroceryFetch(false);
   };
 
   const fetchGroceries = () => {
@@ -58,6 +63,22 @@ export const Groceries = () => {
       )
     });
   };
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setTime(Date.now());
+    }, 3000);
+
+    return () => {
+      clearInterval(interval);
+    }
+  }, []);
+
+  useEffect(() => {
+    if (!pauseGroceryFetch) {
+      fetchGroceries();
+    }
+  }, [time]);
 
   return (
     <div style={styles.page}>
