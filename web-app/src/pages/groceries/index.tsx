@@ -48,7 +48,7 @@ export const Groceries = () => {
 
   const fetchGroceries = () => {
     dispatch(fetchGroceriesAction());
-  }
+  };
 
   const renderGroceryList = () => {
     return grocery.list.map((item, i) => {
@@ -66,7 +66,7 @@ export const Groceries = () => {
 
   useEffect(() => {
     const interval = setInterval(() => {
-      // alert('hi');
+      console.log('hi');
       setTime(Date.now());
     }, 2000);
 
