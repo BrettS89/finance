@@ -66,6 +66,7 @@ export const Groceries = () => {
 
   useEffect(() => {
     const interval = setInterval(() => {
+      alert('hi');
       setTime(Date.now());
     }, 2000);
 
@@ -75,7 +76,6 @@ export const Groceries = () => {
   }, []);
 
   useEffect(() => {
-    alert('hi');
     if (!pauseGroceryFetch) {
       fetchGroceries();
     }
