@@ -1,7 +1,7 @@
 import Ajv from 'ajv';
 import { IService } from '../../types/IService';
 import { db } from '../../storage/db';
-import { GroceryCreate, surplusCreateSchema, GroceryModel, GroceryPatch, surplusPatchSchema } from './schemas';
+import { GroceryCreate, groceryCreateSchema, GroceryModel, GroceryPatch, groceryPatchSchema } from './schemas';
 import { BadRequestError } from '../../errors';
 
 export class GroceryService implements IService<GroceryCreate, GroceryPatch, GroceryModel>  {
@@ -19,7 +19,7 @@ export class GroceryService implements IService<GroceryCreate, GroceryPatch, Gro
 
   async create(data: GroceryCreate) {
     const ajv = new Ajv();
-    const valid = ajv.validate(surplusCreateSchema, data);
+    const valid = ajv.validate(groceryCreateSchema, data);
 
     if (!valid) {
       throw new BadRequestError('invalid request data');
@@ -30,7 +30,7 @@ export class GroceryService implements IService<GroceryCreate, GroceryPatch, Gro
 
   async patch(id: string, data: GroceryPatch) {
     const ajv = new Ajv();
-    const valid = ajv.validate(surplusPatchSchema, data);
+    const valid = ajv.validate(groceryPatchSchema, data);
 
     if (!valid) {
       throw new BadRequestError('invalid request data');

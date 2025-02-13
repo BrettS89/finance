@@ -1,73 +1,73 @@
 import { AnySchema } from 'ajv';
 
-export type GroceryModel = {
+export type TaskModel = {
   id: string;
   name: string;
-  inCart: boolean;
+  completed: boolean;
   createdAt: string;
 }
 
-export type GroceryCreate = {
+export type TaskCreate = {
   name: string;
 }
 
-export type GroceryPatch = {
+export type TaskPatch = {
   name?: string;
-  inCart?: boolean;
+  completed?: boolean;
 }
 
-export const grocerySchema: AnySchema = {
+export const taskSchema: AnySchema = {
   type: 'object',
   properties: {
     id: { type: 'string' },
     name: { type: 'string' },
-    inCart: { type: 'boolean' },
+    completed: { type: 'boolean' },
     createdAt: { type: 'string' },
   },
   required: [
     'id',
     'name',
-    'inCart',
+    'completed',
     'createdAt',
   ],
   additionalProperties: false,
 };
 
-export const groceryResponseSchema: AnySchema = {
+export const taskResponseSchema: AnySchema = {
   type: 'object',
   properties: {
     id: { type: 'string' },
     name: { type: 'string' },
-    inCart: { type: 'boolean' },
+    completed: { type: 'boolean' },
     createdAt: { type: 'string' },
   },
   required: [
     'id',
     'name',
-    'inCart',
+    'completed',
     'createdAt',
   ],
   additionalProperties: false,
 };
 
-export const groceryCreateSchema: AnySchema = {
+export const taskCreateSchema: AnySchema = {
   type: 'object',
   properties: {
     name: { type: 'string' },
-    inCart: { type: 'boolean' },
+    completed: { type: 'boolean' },
   },
   required: [
     'name',
-    'inCart',
+    'completed',
   ],
   additionalProperties: false,
 };
 
-export const groceryPatchSchema: AnySchema = {
+export const taskPatchSchema: AnySchema = {
   type: 'object',
   properties: {
     name: { type: 'string' },
-    inCart: { type: 'boolean' },
+    completed: { type: 'boolean' },
   },
   required: [],
   additionalProperties: false,

@@ -9,6 +9,7 @@ import { expenseTypeRouter } from './services/expense-type/controllers';
 import { expenseRouter } from './services/expense/controllers';
 import { surplusRouter } from './services/surplus/controllers';
 import { groceryRouter } from './services/grocery/controllers';
+import { taskRouter } from './services/task/controllers';
 
 const app = express();
 
@@ -20,6 +21,7 @@ app.use(expenseTypeRouter);
 app.use(expenseRouter);
 app.use(surplusRouter);
 app.use(groceryRouter);
+app.use(taskRouter);
 
 app.get('/', (_, res) => {
   console.log('request');

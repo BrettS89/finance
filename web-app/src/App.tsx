@@ -4,12 +4,14 @@ import { Router } from './routing';
 import { useColorScheme } from '@mui/joy/styles';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router';
-import { fetchExpenseTypes, fetchExpenses, fetchSurplus, fetchGroceries } from './api/calls';
+import { fetchExpenseTypes, fetchExpenses, fetchSurplus, fetchGroceries, fetchTasks } from './api/calls';
 import { expenseTypesFetched } from './redux/expense-type/slice';
 import { expensesFetched } from './redux/expense/slice';
 import { surplusFetched } from './redux/surplus/slice';
 import { groceriesFetched } from './redux/grocery/slice';
+import { tasksFetched } from './redux/task/slice';
 import { BottomNav } from './components/bottom-nav';
+import { colors } from './styles/colors';
 
 function App() {
   const [isInitialized, setIsInitialised] = useState<boolean>(false);
@@ -24,6 +26,7 @@ function App() {
       fetchExpenses(),
       fetchSurplus(),
       fetchGroceries(),
+      fetchTasks(),
     ];
 
     try {
@@ -32,12 +35,14 @@ function App() {
         expenses,
         surplus,
         groceries,
+        tasks
       ] = await Promise.all(promises);
   
       dispatch(expenseTypesFetched(expenseTypes));
       dispatch(expensesFetched(expenses));
       dispatch(surplusFetched(surplus));
       dispatch(groceriesFetched(groceries));
+      dispatch(tasksFetched(tasks));
       
       setIsInitialised(true);
       navigate('/expenses');
@@ -55,9 +60,9 @@ function App() {
 
   return (
     <div className='app'>
-      {isInitialized && (
+      {isInitialized ? (
         <Router/>
-      )}
+      ) : <div style={{ padding: 10, color: colors.white }}>Loading...</div>}
 
       <BottomNav/>
     </div>

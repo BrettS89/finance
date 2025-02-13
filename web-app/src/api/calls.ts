@@ -2,6 +2,7 @@ import { http } from './config';
 import { CreateExpenseType, PatchExpenseType } from '../redux/expense-type/slice';
 import { CreateExpense } from '../redux/expense/slice';
 import { CreateGrocery, PatchGrocery } from '../redux/grocery/slice';
+import { CreateTask, PatchTask } from '../redux/task/slice';
 
 export const fetchExpenseTypes = async () => {
   const { data } = await http({
@@ -128,5 +129,46 @@ export const batchDeleteGroceries = async () => {
   await http({
     url: `/grocery/batch-delete`,
     method: 'POST',
+  });
+};
+
+// tasks
+
+export const fetchTasks = async () => {
+  const { data } = await http({
+    url: '/task',
+    method: 'GET',
+  });
+
+  return data;
+};
+
+export const createTask = async (payload: CreateTask) => {
+  const { data } = await http({
+    url: '/task',
+    method: 'POST',
+    data: {
+      ...payload,
+      completed: false,
+    },
+  });
+
+  return data;
+};
+
+export const deleteTask = async (id: string) => {
+  const { data } = await http({
+    url: `/task/${id}`,
+    method: 'DELETE',
+  });
+
+  return data;
+};
+
+export const patchTask = async (id: string, payload: PatchTask) => {
+  const { data } = await http({
+    url: `/task/${id}`,
+    method: 'PATCH',
+    data: payload,
   });
 };
