@@ -90,7 +90,7 @@ export const Expenses = () => {
   return (
     <div style={styles.page}>
       <ExpensesHeader/>
-      <div>
+      <div style={styles.scrollable}>
         <div style={{ marginBottom: 10, width: '100%' }}>
           <div style={styles.header}>
             <Typography style={styles.headerText}>

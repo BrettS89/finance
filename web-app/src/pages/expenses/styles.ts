@@ -76,4 +76,11 @@ export const styles = {
     marginBottom: 30,
     marginTop: 30,
   },
+  scrollable: {
+    display: 'flex',
+    flexDirection: 'column' as const,
+    flexGrow: 1,
+    height: 100,
+    overflowY: 'auto' as const,
+  }
 };
