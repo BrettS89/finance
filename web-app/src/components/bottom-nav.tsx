@@ -1,8 +1,8 @@
 import { FC, PropsWithChildren } from 'react';
 import { useLocation, useNavigate } from 'react-router';
 import { TbCurrencyDollar } from 'react-icons/tb';
-import { MdOutlineLocalGroceryStore } from "react-icons/md";
-import { FaRegSquareCheck } from "react-icons/fa6";
+import { MdOutlineLocalGroceryStore } from 'react-icons/md';
+import { FaRegSquareCheck } from 'react-icons/fa6';
 import { colors } from '../styles/colors';
 
 export const BottomNav = () => {
