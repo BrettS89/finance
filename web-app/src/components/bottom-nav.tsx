@@ -13,7 +13,7 @@ export const BottomNav = () => {
       <NavItem name='Budget' path='/budget' Icon={({ color }: any) => <LuFileSpreadsheet style={{ fontWeight: 700, fontSize: 26, color }} />} />
       {/* <NavItem name='Groceries' path='/groceries' Icon={({ color }: any) => <MdOutlineLocalGroceryStore style={{ fontWeight: 700, fontSize: 30, color }} />} /> */}
       <NavItem name='Tasks' path='/tasks' Icon={({ color }: any) => <FaRegSquareCheck style={{ fontWeight: 700, fontSize: 26, color }} />} />
-      <NavItem name='Events' path='/events' Icon={({ color }: any) => <MdCalendarMonth style={{ fontWeight: 700, fontSize: 28, color }} />} />
+      {/* <NavItem name='Events' path='/events' Icon={({ color }: any) => <MdCalendarMonth style={{ fontWeight: 700, fontSize: 28, color }} />} /> */}
     </div>
   );
 };
