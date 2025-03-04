@@ -10,6 +10,8 @@ import { expenseRouter } from './services/expense/controllers';
 import { surplusRouter } from './services/surplus/controllers';
 import { groceryRouter } from './services/grocery/controllers';
 import { taskRouter } from './services/task/controllers';
+import { eventRouter } from './services/event/controllers';
+import { budgetRouter } from './services/budget/controllers';
 
 const app = express();
 
@@ -22,6 +24,8 @@ app.use(expenseRouter);
 app.use(surplusRouter);
 app.use(groceryRouter);
 app.use(taskRouter);
+app.use(eventRouter);
+app.use(budgetRouter);
 
 app.get('/', (_, res) => {
   console.log('request');

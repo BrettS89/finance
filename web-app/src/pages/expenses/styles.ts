@@ -65,7 +65,6 @@ export const styles = {
     display: 'flex',
     alignItems: 'center',
   },
-
   modalBody: {
     backgroundColor: colors.background,
     width: '100%',

@@ -4,7 +4,7 @@ import { clearWeeklyExpenses, clearMonthlyExpenses, clearAnnualExpenses } from '
 
 const start = async () => {
   await db.connect();
-  await db.addTables(['expense-type', 'expense', 'surplus', 'grocery', 'task']);
+  await db.addTables(['expense-type', 'expense', 'surplus', 'grocery', 'task', 'event', 'budget']);
 
   clearWeeklyExpenses.start();
   clearMonthlyExpenses.start();

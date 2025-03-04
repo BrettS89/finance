@@ -1,7 +1,8 @@
 import { FC, PropsWithChildren } from 'react';
 import { useLocation, useNavigate } from 'react-router';
 import { TbCurrencyDollar } from 'react-icons/tb';
-import { MdOutlineLocalGroceryStore } from 'react-icons/md';
+import { MdOutlineLocalGroceryStore, MdCalendarMonth } from 'react-icons/md';
+import { LuFileSpreadsheet } from "react-icons/lu";
 import { FaRegSquareCheck } from 'react-icons/fa6';
 import { colors } from '../styles/colors';
 
@@ -9,8 +10,10 @@ export const BottomNav = () => {
   return (
     <div style={styles.nav}>
       <NavItem name='Expenses' path='/expenses' Icon={({ color }: any) => <TbCurrencyDollar style={{ fontWeight: 700, fontSize: 30, color }} />} />
-      <NavItem name='Groceries' path='/groceries' Icon={({ color }: any) => <MdOutlineLocalGroceryStore style={{ fontWeight: 700, fontSize: 30, color }} />} />
+      <NavItem name='Budget' path='/budget' Icon={({ color }: any) => <LuFileSpreadsheet style={{ fontWeight: 700, fontSize: 26, color }} />} />
+      {/* <NavItem name='Groceries' path='/groceries' Icon={({ color }: any) => <MdOutlineLocalGroceryStore style={{ fontWeight: 700, fontSize: 30, color }} />} /> */}
       <NavItem name='Tasks' path='/tasks' Icon={({ color }: any) => <FaRegSquareCheck style={{ fontWeight: 700, fontSize: 26, color }} />} />
+      <NavItem name='Events' path='/events' Icon={({ color }: any) => <MdCalendarMonth style={{ fontWeight: 700, fontSize: 28, color }} />} />
     </div>
   );
 };
@@ -58,11 +61,11 @@ const styles = {
     width: 65,
   },
   text: {
-    fontSize: 14,
+    fontSize: 12,
     color: colors.white,
   },
   activeText: {
-    fontSize: 14,
+    fontSize: 12,
     color: colors.blue,
   }
 };

@@ -6,6 +6,8 @@ import { expenseReducer } from './expense/slice';
 import { surplusReducer } from './surplus/slice';
 import { groceryReducer } from './grocery/slice';
 import { taskReducer } from './task/slice';
+import { eventReducer } from './event/slice';
+import { budgetReducer } from './budget/slice';
 
 export const store = configureStore({
   reducer: {
@@ -14,6 +16,8 @@ export const store = configureStore({
     surplus: surplusReducer,
     grocery: groceryReducer,
     task: taskReducer,
+    event: eventReducer,
+    budget: budgetReducer,
   },
   middleware: (getDefaultMiddleware) => {
     return getDefaultMiddleware({ serializableCheck: false }).prepend(listenerMiddleware.middleware);
@@ -27,4 +31,6 @@ export const expensesSelector = (store: RootStore) => store.expense.list;
 export const expenseTypesSelector = (store: RootStore) => store.expenseType.list;
 export const surplusSelector = (store: RootStore) => store.surplus;
 export const grocerySelector = (store: RootStore) => store.grocery;
-export const taskSelector = (store: RootStore) => store.task; 
+export const taskSelector = (store: RootStore) => store.task;
+export const eventSelector = (store: RootStore) => store.event;
+export const budgetSelector = (store: RootStore) => store.budget;

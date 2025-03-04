@@ -3,6 +3,7 @@ import { CreateExpenseType, PatchExpenseType } from '../redux/expense-type/slice
 import { CreateExpense } from '../redux/expense/slice';
 import { CreateGrocery, PatchGrocery } from '../redux/grocery/slice';
 import { CreateTask, PatchTask } from '../redux/task/slice';
+import { CreateBudget } from '../redux/budget/slice';
 
 export const fetchExpenseTypes = async () => {
   const { data } = await http({
@@ -171,4 +172,78 @@ export const patchTask = async (id: string, payload: PatchTask) => {
     method: 'PATCH',
     data: payload,
   });
+
+  return data
+};
+
+// Events
+
+export const fetchEvents = async () => {
+  const { data } = await http({
+    url: '/event',
+    method: 'GET',
+  });
+
+  return data;
+};
+
+export const createEvent = async (payload: CreateTask) => {
+  const { data } = await http({
+    url: '/event',
+    method: 'POST',
+    data: {
+      ...payload,
+    },
+  });
+
+  return data;
+};
+
+export const deleteEvent = async (id: string) => {
+  const { data } = await http({
+    url: `/event/${id}`,
+    method: 'DELETE',
+  });
+
+  return data;
+};
+
+export const patchEvent = async (id: string, payload: PatchTask) => {
+  const { data } = await http({
+    url: `/event/${id}`,
+    method: 'PATCH',
+    data: payload,
+  });
+
+  return data
+};
+
+// BUDGET
+
+export const fetchBudget = async () => {
+  const { data } = await http({
+    url: '/budget',
+    method: 'GET',
+  });
+
+  return data;
+};
+
+export const createBudget = async (payload: CreateBudget) => {
+  const { data } = await http({
+    url: '/budget',
+    method: 'POST',
+    data: payload,
+  });
+
+  return data;
+};
+
+export const deleteBudget = async (id: string) => {
+  const { data } = await http({
+    url: `/budget/${id}`,
+    method: 'DELETE',
+  });
+
+  return data;
 };

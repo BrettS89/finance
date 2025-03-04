@@ -4,7 +4,7 @@ import { Router } from './routing';
 import { useColorScheme } from '@mui/joy/styles';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router';
-import { fetchExpenseTypes, fetchExpenses, fetchSurplus, fetchGroceries, fetchTasks } from './api/calls';
+import { fetchExpenseTypes, fetchExpenses, fetchSurplus, fetchGroceries, fetchTasks, fetchEvents, fetchBudget } from './api/calls';
 import { expenseTypesFetched } from './redux/expense-type/slice';
 import { expensesFetched } from './redux/expense/slice';
 import { surplusFetched } from './redux/surplus/slice';
@@ -12,6 +12,8 @@ import { groceriesFetched } from './redux/grocery/slice';
 import { tasksFetched } from './redux/task/slice';
 import { BottomNav } from './components/bottom-nav';
 import { colors } from './styles/colors';
+import { eventsFetched } from './redux/event/slice';
+import { budgetsFetched } from './redux/budget/slice';
 
 function App() {
   const [isInitialized, setIsInitialised] = useState<boolean>(false);
@@ -27,6 +29,8 @@ function App() {
       fetchSurplus(),
       fetchGroceries(),
       fetchTasks(),
+      fetchEvents(),
+      fetchBudget(),
     ];
 
     try {
@@ -35,7 +39,9 @@ function App() {
         expenses,
         surplus,
         groceries,
-        tasks
+        tasks,
+        events,
+        budgets,
       ] = await Promise.all(promises);
   
       dispatch(expenseTypesFetched(expenseTypes));
@@ -43,6 +49,8 @@ function App() {
       dispatch(surplusFetched(surplus));
       dispatch(groceriesFetched(groceries));
       dispatch(tasksFetched(tasks));
+      dispatch(eventsFetched(events));
+      dispatch(budgetsFetched(budgets));
       
       setIsInitialised(true);
       navigate('/expenses');
