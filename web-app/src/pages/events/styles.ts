@@ -15,7 +15,7 @@ export const styles = {
   eventItemTopRow: {
     display: 'flex',
     width: '100%',
-    justfyContent: 'space-between',
+    justifyContent: 'space-between',
     alignItems: 'center',
   },
   modalBody: {

@@ -36,11 +36,13 @@ export const Events = () => {
   };
 
   const renderEvents = () => {
-    return event.list.map(item => {
+    return event.list.map((item, i) => {
       return (
         <EventItem
           key={item.id}
           event={item}
+          index={i}
+          deleteEvent={deleteEvent}
         />
       );
     });
