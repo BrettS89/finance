@@ -1,7 +1,6 @@
 import { PostgresCrud } from '../../../storage/db/postgres/crud';
 import { TABLES } from '../../../storage/db/postgres/tables';
 import { RegisterEndpoint } from '../../../types/api';
-import { createExpenseSchema } from '../expense.validators';
 import { ExpenseRow } from '../types/expense.row';
 
 export const deleteExpenseEndpoint: RegisterEndpoint = ({ route, fastify }) => {
@@ -10,7 +9,6 @@ export const deleteExpenseEndpoint: RegisterEndpoint = ({ route, fastify }) => {
     url: route,
     schema: {
       tags: ['expense'],
-      body: createExpenseSchema,
       response: {
         204: { type: 'null' },
       },

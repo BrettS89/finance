@@ -27,9 +27,9 @@ function App() {
       fetchExpenseTypes(),
       fetchExpenses(),
       fetchSurplus(),
-      fetchGroceries(),
-      fetchTasks(),
-      fetchEvents(),
+      // fetchGroceries(),
+      // fetchTasks(),
+      // fetchEvents(),
       fetchBudget(),
     ];
 
@@ -38,18 +38,18 @@ function App() {
         expenseTypes,
         expenses,
         surplus,
-        groceries,
-        tasks,
-        events,
+        // groceries,
+        // tasks,
+        // events,
         budgets,
       ] = await Promise.all(promises);
   
       dispatch(expenseTypesFetched(expenseTypes));
       dispatch(expensesFetched(expenses));
       dispatch(surplusFetched(surplus));
-      dispatch(groceriesFetched(groceries));
-      dispatch(tasksFetched(tasks));
-      dispatch(eventsFetched(events));
+      // dispatch(groceriesFetched(groceries));
+      // dispatch(tasksFetched(tasks));
+      // dispatch(eventsFetched(events));
       dispatch(budgetsFetched(budgets));
       
       setIsInitialised(true);
