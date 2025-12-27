@@ -8,6 +8,15 @@ export const styles = {
     height: '100%',
     padding: 15,
   },
+  mainHeader: {
+    textAlign: 'center' as const,
+    display: 'flex',
+    // justifyContent: 'space-between' as const,
+    padding: 10,
+    paddingTop: 5,
+    paddingBottom: 5,
+    alignItems: 'center' as const
+  },
   header: {
     display: 'flex',
     justifyContent: 'space-between',

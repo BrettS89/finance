@@ -2,6 +2,7 @@ import { useSelector } from 'react-redux';
 import { surplusSelector } from '../../redux/store';
 import { colors } from '../../styles/colors'
 import { TbCurrencyDollar } from 'react-icons/tb';
+import { styles } from './styles';
 
 export const ExpensesHeader = () => {
   const surplus = useSelector(surplusSelector);
@@ -19,9 +20,14 @@ export const ExpensesHeader = () => {
   }
 
   return (
-    <div style={{ textAlign: 'center', display: 'flex',justifyContent: 'space-between', padding: 10, paddingTop: 16, paddingBottom: 16, alignItems: 'center' }}>
-      <TbCurrencyDollar style={{ fontWeight: 700, fontSize: 34, color: colors.green }} />
-      <span style={{ fontSize: 16, fontWeight: 500, color: colors.white }}>Surplus: {renderSurplusAmount()}</span>
+    <div style={styles.cardShadow}>
+      <div style={styles.cardContainer}>
+        <div style={styles.mainHeader}>
+          <TbCurrencyDollar style={{ fontWeight: 700, fontSize: 34, color: colors.green }} />
+          <span style={{ fontSize: 16, fontWeight: 500, color: colors.white, marginLeft: 10 }}><span style={{ opacity: 0.7 }}>Surplus:</span> {renderSurplusAmount()}</span>
+        </div>
+      </div>
     </div>
+    
   )
 };
