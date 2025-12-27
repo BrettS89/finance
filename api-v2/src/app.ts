@@ -13,6 +13,7 @@ import inFlightLimiter from './middleware/in-flight-limiter';
 
 import { registerExpenseTypeRoutes } from './modules/expense-type';
 import { registerExpenseRoutes } from './modules/expense';
+import { registerBudgetRoutes } from './modules/budget';
 
 declare module 'fastify' {
   interface FastifyInstance {
@@ -93,6 +94,7 @@ export const initApp = async () => {
     // ingestScope.register(ingestionRoutes);
     fastify.register(registerExpenseTypeRoutes);
     fastify.register(registerExpenseRoutes);
+    fastify.register(registerBudgetRoutes);
   });
 
   addFormatServiceParamsHook(fastify);
