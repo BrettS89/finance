@@ -91,47 +91,62 @@ export const Expenses = () => {
     <div style={styles.page}>
       <ExpensesHeader/>
       <div style={styles.scrollable}>
-        <div style={{ marginBottom: 10, width: '100%' }}>
-          <div style={styles.header}>
-            <Typography style={styles.headerText}>
-              Weekly Expenses
-            </Typography>
-            <IoIosAddCircle
-              style={{ marginRight: 5,  fontSize: 32, color: colors.white }}
-              onClick={() => openExpenseTypeModal('week')}
-            />
-          </div>
+
+        <div style={styles.cardShadow}>
+          <div style={styles.cardContainer}>
+            <div style={styles.card}>
+              <div style={styles.header}>
+                <Typography style={styles.headerText}>
+                  Weekly Expenses
+                </Typography>
+                <IoIosAddCircle
+                  style={{ marginRight: 5,  fontSize: 32, color: colors.white }}
+                  onClick={() => openExpenseTypeModal('week')}
+                />
+              </div>
           
-          {renderExpenseTypes('week')}
+              {renderExpenseTypes('week')}
+            </div>
+          </div>
         </div>
 
-        <div style={{ marginBottom: 10 }}>
-          <div style={styles.header}>
-            <Typography style={styles.headerText}>
-              Monthly Expenses
-            </Typography>
-            <IoIosAddCircle
-              style={{ marginRight: 5,  fontSize: 32, color: colors.white }}
-              onClick={() => openExpenseTypeModal('month')}
-            />
+        <div style={styles.cardShadow}>
+          <div style={styles.cardContainer}>
+            <div style={styles.card}>
+              <div style={styles.header}>
+                <Typography style={styles.headerText}>
+                  Monthly Expenses
+                </Typography>
+                <IoIosAddCircle
+                  style={{ marginRight: 5,  fontSize: 32, color: colors.white }}
+                  onClick={() => openExpenseTypeModal('month')}
+                />
+              </div>
+              
+              {renderExpenseTypes('month')}
+            </div>
           </div>
-          
-          {renderExpenseTypes('month')}
+        </div>
+         
+        
+        <div style={styles.cardShadow}>
+          <div style={styles.cardContainer}>
+            <div style={styles.card}>
+                <div style={styles.header}>
+                  <Typography style={styles.headerText}>
+                    Annual Expenses
+                  </Typography>
+                  <IoIosAddCircle
+                    style={{ marginRight: 5,  fontSize: 32, color: colors.white }}
+                    onClick={() => openExpenseTypeModal('year')}
+                  />
+                </div>
+                {renderExpenseTypes('year')}
+              </div>
+            </div>
+          </div>
         </div>
         
-        <div style={{ marginBottom: 10 }}>
-          <div style={styles.header}>
-            <Typography style={styles.headerText}>
-              Annual Expenses
-            </Typography>
-            <IoIosAddCircle
-              style={{ marginRight: 5,  fontSize: 32, color: colors.white }}
-              onClick={() => openExpenseTypeModal('year')}
-            />
-          </div>
-          {renderExpenseTypes('year')}
-        </div>
-      </div>
      
 
       <AddExpenseModal

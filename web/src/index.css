@@ -33,7 +33,12 @@ body {
   width: 100%;
   min-height: 100vh;
   box-sizing: border-box;
-  background: #282C34;
+  background: linear-gradient(
+    180deg,
+    #272f4d 0%,
+    #242c48 55%,
+    #202744 100%
+  );
   -webkit-overflow-scrolling: touch; /* Smooth scrolling */
 }
 

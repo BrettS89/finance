@@ -4,18 +4,22 @@ export const styles = {
   page: {
     display: 'flex',
     flexDirection: 'column' as const,
-    width: '100%',
+    // width: '100%',
     height: '100%',
+    padding: 15,
   },
   header: {
     display: 'flex',
     justifyContent: 'space-between',
     alignItems: 'center',
-    width: '100%',
-    backgroundColor: colors.blue,
-    paddingTop: 4,
-    paddingBottom: 4,
+    // width: '100%',
+    background:
+    "linear-gradient(135deg, #5a8fe0 0%, #466fcb 45%, #395bb8 100%)",
+    paddingTop: 5,
+    paddingBottom: 5,
     marginBottom: 10,
+    paddingLeft: 5,
+    paddingRight: 5
   },
   headerText: {
     width: '100%',
@@ -24,9 +28,31 @@ export const styles = {
     color: colors.white,
     paddingLeft: 10,
   },
+  cardShadow: {
+    // borderRadius: R,
+    borderRadius: 16,
+    overflow: "visible",
+    background: "transparent",
+    boxShadow: '0 2px 6px rgba(0,0,0,0.14), 0 2px 4px rgba(0,0,0,0.22)',
+    marginBottom: 18,
+  } satisfies React.CSSProperties,
+
+  cardContainer: {
+    borderRadius: 16,
+    background: "linear-gradient(90deg, #333e5f 0%, #303c5f 50%, #2e3959 100%)",
+    // border: "1px solid rgba(255, 255, 255, 0.045)",
+  } satisfies React.CSSProperties,
+
+  card: {
+    borderRadius: 16,           // match
+    overflow: "hidden",         // clip header/rows
+    background:
+    "linear-gradient(90deg, #333e5f 0%, #303c5f 50%, #2e3959 100%)",
+  } satisfies React.CSSProperties,
   expenseTypeList: {
-    paddingLeft: 10,
-    paddingRight: 6,
+    paddingLeft: 15,
+    paddingRight: 9,
+    paddingBottom: 5
   },
   expenseTypeHeader: {
     display: 'flex',

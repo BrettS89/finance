@@ -1,5 +1,6 @@
 import { Pool } from 'pg';
 import Fastify from 'fastify';
+import cors from '@fastify/cors'
 import helmet from '@fastify/helmet';
 import compress from '@fastify/compress';
 import ajvFormats from 'ajv-formats';
@@ -51,6 +52,10 @@ export const initApp = async () => {
       }
     })
   });
+
+  await fastify.register(cors, {
+    origin: true, // 👈 reflect request origin
+  })
 
   fastify.addHook('onRequest', async (req, _reply) => {
     req.log.info({ id: req.id, method: req.method, url: req.url, ip: req.ip }, 'request start');

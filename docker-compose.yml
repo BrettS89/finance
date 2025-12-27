@@ -17,19 +17,19 @@ services:
       - /app/api-v2/node_modules   # volume lives here
       - .:/app                  # monorepo
 
-  # finance-web:
-  #   build:
-  #     context: ./web
-  #     dockerfile: Dockerfile.dev
-  #   container_name: finance-web
-  #   env_file:
-  #     - ./web/.env
-  #   ports:
-  #     - "5173:5173"
-  #   restart: unless-stopped
-  #   volumes:
-  #     - /app/web/node_modules   # volume here
-  #     - .:/app                  # monorepo
+  finance-web:
+    build:
+      context: ./web
+      dockerfile: Dockerfile.dev
+    container_name: finance-web
+    env_file:
+      - ./web/.env
+    ports:
+      - "5173:5173"
+    restart: unless-stopped
+    volumes:
+      - ./web:/app
+      - /app/node_modules                # monorepo
 
   finance-pg:
     image: postgres:16

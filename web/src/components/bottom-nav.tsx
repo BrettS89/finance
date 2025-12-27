@@ -52,6 +52,7 @@ const styles = {
     paddingTop: 6,
     borderTop: `1px solid ${colors.border}`,
     justifyContent: 'space-between',
+    background: '#202744',
   },
   navItem: {
     display: 'flex',
