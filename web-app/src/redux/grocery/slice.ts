@@ -13,7 +13,7 @@ export type Grocery = {
   id: string;
   name: string;
   inCart: boolean;
-  createdAt: string;
+  created_at: string;
 }
 
 export type GroceryState = {

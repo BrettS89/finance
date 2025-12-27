@@ -13,7 +13,7 @@ export type Task = {
   id: string;
   name: string;
   completed: boolean;
-  createdAt: string;
+  created_at: string;
 }
 
 export type TaskState = {

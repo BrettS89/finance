@@ -1,0 +1,48 @@
+version: '3'
+
+services:
+  finance-api:
+    build:
+      context: ./api-v2
+      dockerfile: Dockerfile.dev
+    container_name: finance-api
+    depends_on:
+      - finance-pg
+    env_file:
+      - ./api/.env
+    ports:
+      - "4004:4004"
+    restart: unless-stopped
+    volumes:
+      - /app/api-v2/node_modules   # volume lives here
+      - .:/app                  # monorepo
+
+  # deletable-web:
+  #   build:
+  #     context: ./web
+  #     dockerfile: Dockerfile.dev
+  #   container_name: deletable-web
+  #   env_file:
+  #     - ./web/.env
+  #   ports:
+  #     - "5173:5173"
+  #   restart: unless-stopped
+  #   volumes:
+  #     - /app/web/node_modules   # volume here
+  #     - .:/app                  # monorepo
+
+  finance-pg:
+    image: postgres:16
+    container_name: finance-pg
+    restart: unless-stopped
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: root
+      POSTGRES_DB: finance
+    volumes:
+      - finance_pg_data:/var/lib/postgresql/data
+
+volumes:
+  finance_pg_data:

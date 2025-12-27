@@ -4,7 +4,7 @@ export type EventModel = {
   id: string;
   name: string;
   datetime: string;
-  createdAt: string;
+  created_at: string;
 }
 
 export type EventCreate = {
@@ -23,13 +23,13 @@ export const eventSchema: AnySchema = {
     id: { type: 'string' },
     name: { type: 'string' },
     datetime: { type: 'string' },
-    createdAt: { type: 'string' },
+    created_at: { type: 'string' },
   },
   required: [
     'id',
     'name',
     'datetime',
-    'createdAt',
+    'created_at',
   ],
   additionalProperties: false,
 };
@@ -40,13 +40,13 @@ export const eventResponseSchema: AnySchema = {
     id: { type: 'string' },
     name: { type: 'string' },
     datetime: { type: 'string' },
-    createdAt: { type: 'string' },
+    created_at: { type: 'string' },
   },
   required: [
     'id',
     'name',
     'datetime',
-    'createdAt',
+    'created_at',
   ],
   additionalProperties: false,
 };

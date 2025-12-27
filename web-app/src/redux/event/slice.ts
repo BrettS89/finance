@@ -14,7 +14,7 @@ export type Event = {
   id: string;
   name: string;
   datetime: string;
-  createdAt: string;
+  created_at: string;
 }
 
 export type EventState = {

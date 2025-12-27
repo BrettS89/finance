@@ -4,7 +4,7 @@ export type BudgetModel = {
   id: string;
   name: string;
   amount: number;
-  createdAt: string;
+  created_at: string;
 }
 
 export type BudgetCreate = {
@@ -23,13 +23,13 @@ export const budgetSchema: AnySchema = {
     id: { type: 'string' },
     name: { type: 'string' },
     amount: { type: 'number' },
-    createdAt: { type: 'string' },
+    created_at: { type: 'string' },
   },
   required: [
     'id',
     'name',
     'amount',
-    'createdAt',
+    'created_at',
   ],
   additionalProperties: false,
 };
@@ -40,13 +40,13 @@ export const budgetResponseSchema: AnySchema = {
     id: { type: 'string' },
     name: { type: 'string' },
     amount: { type: 'number' },
-    createdAt: { type: 'string' },
+    created_at: { type: 'string' },
   },
   required: [
     'id',
     'name',
     'amount',
-    'createdAt',
+    'created_at',
   ],
   additionalProperties: false,
 };

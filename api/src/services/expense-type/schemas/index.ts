@@ -6,7 +6,7 @@ export type ExpenseTypeModel = {
   frequency: 'week' | 'month' | 'year';
   budget: number;
   description?: string;
-  createdAt: string
+  created_at: string
 }
 
 export type ExpenseTypeCreate = {

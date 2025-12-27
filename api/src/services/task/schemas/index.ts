@@ -4,7 +4,7 @@ export type TaskModel = {
   id: string;
   name: string;
   completed: boolean;
-  createdAt: string;
+  created_at: string;
 }
 
 export type TaskCreate = {
@@ -22,13 +22,13 @@ export const taskSchema: AnySchema = {
     id: { type: 'string' },
     name: { type: 'string' },
     completed: { type: 'boolean' },
-    createdAt: { type: 'string' },
+    created_at: { type: 'string' },
   },
   required: [
     'id',
     'name',
     'completed',
-    'createdAt',
+    'created_at',
   ],
   additionalProperties: false,
 };
@@ -39,13 +39,13 @@ export const taskResponseSchema: AnySchema = {
     id: { type: 'string' },
     name: { type: 'string' },
     completed: { type: 'boolean' },
-    createdAt: { type: 'string' },
+    created_at: { type: 'string' },
   },
   required: [
     'id',
     'name',
     'completed',
-    'createdAt',
+    'created_at',
   ],
   additionalProperties: false,
 };

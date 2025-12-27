@@ -4,7 +4,7 @@ export type GroceryModel = {
   id: string;
   name: string;
   inCart: boolean;
-  createdAt: string;
+  created_at: string;
 }
 
 export type GroceryCreate = {
@@ -22,13 +22,13 @@ export const grocerySchema: AnySchema = {
     id: { type: 'string' },
     name: { type: 'string' },
     inCart: { type: 'boolean' },
-    createdAt: { type: 'string' },
+    created_at: { type: 'string' },
   },
   required: [
     'id',
     'name',
     'inCart',
-    'createdAt',
+    'created_at',
   ],
   additionalProperties: false,
 };
@@ -39,13 +39,13 @@ export const groceryResponseSchema: AnySchema = {
     id: { type: 'string' },
     name: { type: 'string' },
     inCart: { type: 'boolean' },
-    createdAt: { type: 'string' },
+    created_at: { type: 'string' },
   },
   required: [
     'id',
     'name',
     'inCart',
-    'createdAt',
+    'created_at',
   ],
   additionalProperties: false,
 };

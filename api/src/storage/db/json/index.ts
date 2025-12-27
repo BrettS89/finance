@@ -46,7 +46,7 @@ class JsonDbTable implements Table {
   async find<T>(): Promise<T[]> {
     const documents = await this.getDataFromTable(this.name)
 
-    return documents.sort((a, b) => a.createdAt - b.createdAt) as T[];
+    return documents.sort((a, b) => a.created_at - b.created_at) as T[];
   }
 
   async create<T>(data: Record<string, any>): Promise<T> {
@@ -54,7 +54,7 @@ class JsonDbTable implements Table {
 
     const document = {
       id,
-      createdAt: new Date().toISOString(),
+      created_at: new Date().toISOString(),
       ...data,
     }
 
