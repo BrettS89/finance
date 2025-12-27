@@ -14,20 +14,20 @@ import { ExpensesHeader } from './header';
 
 export const Expenses = () => {
   const [viewExpenseModalOpen, setViewExpenseModalOpen] = useState(false);
-  const [expenseTypeIdForAddingExpense, setExpenseTypeIdForAddingExpense] = useState<string | null>(null);
+  const [expense_type_idForAddingExpense, setexpense_type_idForAddingExpense] = useState<string | null>(null);
   const [addExpenseTypeModalOpen, setAddExpenseTypeModalOpen] = useState<boolean>(false);
   const [frequency, setFrequency] = useState<'week' | 'month' | 'year'>();
 
   const dispatch = useDispatch();
   const expenseTypes = useSelector(expenseTypesSelector);
 
-  const openAddExpenseModal = (expenseTypeId: string) => {
-    setExpenseTypeIdForAddingExpense(expenseTypeId);
+  const openAddExpenseModal = (expense_type_id: string) => {
+    setexpense_type_idForAddingExpense(expense_type_id);
     setViewExpenseModalOpen(true);
   };
 
   const closeAddExpenseModal = () => {
-    setExpenseTypeIdForAddingExpense(null);
+    setexpense_type_idForAddingExpense(null);
     setViewExpenseModalOpen(false);
   };
 
@@ -42,7 +42,7 @@ export const Expenses = () => {
   };
 
   const addExpense = (name: string, amount: number) => {
-    if (!expenseTypeIdForAddingExpense) {
+    if (!expense_type_idForAddingExpense) {
       alert('Must include the type of expense');
       return;
     }
@@ -51,7 +51,7 @@ export const Expenses = () => {
       data: {
         name,
         amount,
-        expenseTypeId: expenseTypeIdForAddingExpense,
+        expense_type_id: expense_type_idForAddingExpense,
       },
       callback: closeAddExpenseModal,
     }));

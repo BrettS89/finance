@@ -6,13 +6,15 @@ export const expenseResponseSchema: AnySchema = {
     id: { type: 'integer' },
     name: { type: 'string' },
     amount: { type: 'number' },
-    expenseTypeId: { type: 'integer' },
+    expense_type_id: { type: 'integer' },
+    created_at: { type: 'string' },
   },
   required: [
     'id',
     'name',
     'amount',
-    'expenseTypeId',
+    'expense_type_id',
+    'created_at',
   ],
   additionalProperties: false,
 };
@@ -22,12 +24,13 @@ export const createExpenseSchema: AnySchema = {
   properties: {
     name: { type: 'string' },
     amount: { type: 'number', minimum: 1 },
-    expenseTypeId: { type: 'integer', minimum: 1 },
+    expense_type_id: { type: 'integer', minimum: 1 },
   },
   required: [
     'name',
     'amount',
-    'expenseTypeId',
+    'expense_type_id',
+
   ],
   additionalProperties: false,
 };

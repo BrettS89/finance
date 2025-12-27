@@ -4,14 +4,14 @@ export type ExpenseModel = {
   id: string;
   name: string;
   amount: number;
-  expenseTypeId: string;
+  expense_type_id: string;
   created_at: string;
 }
 
 export type ExpenseCreate = {
   name: string;
   amount: number;
-  expenseTypeId: string;
+  expense_type_id: string;
 }
 
 export type ExpensePatch = {
@@ -25,13 +25,13 @@ export const expenseSchema: AnySchema = {
     id: { type: 'string' },
     name: { type: 'string' },
     amount: { type: 'number' },
-    expenseTypeId: { type: 'string' },
+    expense_type_id: { type: 'string' },
   },
   required: [
     'id',
     'name',
     'amount',
-    'expenseTypeId',
+    'expense_type_id',
   ],
   additionalProperties: false,
 };
@@ -42,13 +42,13 @@ export const expenseResponseSchema: AnySchema = {
     id: { type: 'string' },
     name: { type: 'string' },
     amount: { type: 'number' },
-    expenseTypeId: { type: 'string' },
+    expense_type_id: { type: 'string' },
   },
   required: [
     'id',
     'name',
     'amount',
-    'expenseTypeId',
+    'expense_type_id',
   ],
   additionalProperties: false,
 };
@@ -58,12 +58,12 @@ export const expenseCreateSchema: AnySchema = {
   properties: {
     name: { type: 'string' },
     amount: { type: 'number' },
-    expenseTypeId: { type: 'string' },
+    expense_type_id: { type: 'string' },
   },
   required: [
     'name',
     'amount',
-    'expenseTypeId',
+    'expense_type_id',
   ],
   additionalProperties: false,
 };
@@ -73,7 +73,7 @@ export const expensePatchSchema: AnySchema = {
   properties: {
     name: { type: 'string' },
     amount: { type: 'number' },
-    expenseTypeId: { type: 'string' },
+    expense_type_id: { type: 'string' },
   },
   required: [],
   additionalProperties: false,

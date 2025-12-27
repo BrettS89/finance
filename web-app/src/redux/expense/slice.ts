@@ -3,7 +3,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 export type CreateExpense = {
   name: string;
   amount: number;
-  expenseTypeId: string
+  expense_type_id: string
 }
 
 export type PatchExpense = {
@@ -11,7 +11,7 @@ export type PatchExpense = {
   data: {
     name?: string;
     amount?: number;
-    expenseTypeId?: string
+    expense_type_id?: string
   }
 }
 
@@ -19,7 +19,7 @@ export type Expense = {
   id: string;
   name: string;
   amount: number;
-  expenseTypeId: string
+  expense_type_id: string
 }
 
 export type ExpenseState = {

@@ -4,6 +4,5 @@ import { ExpenseResponseDto } from './types/expense.dto';
 export const toExpenseDto = (expense: ExpenseModel): ExpenseResponseDto => {
   return {
     ...expense,
-    created_at: expense.created_at.toISOString(),
   }
 };

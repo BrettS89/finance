@@ -27,7 +27,7 @@ const deleteExpenses = async (frequency: 'week' | 'month' | 'year') => {
   let spent = 0;
 
   for (let expense of expenses) {
-    if (ids[expense.expenseTypeId]) {
+    if (ids[expense.expense_type_id]) {
       spent += expense.amount;
       await expenseService.delete(expense.id);
     }

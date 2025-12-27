@@ -11,14 +11,14 @@ import Typography from '@mui/joy/Typography';
 
 interface Props extends PropsWithChildren {
   expenseType: ExpType;
-  openAddExpenseModal(expenseTypeId: string): void;
+  openAddExpenseModal(expense_type_id: string): void;
 }
 
 export const ExpenseType: FC<Props> = ({ expenseType, openAddExpenseModal }) => {
   const [viewExpenses, setViewExpenses] = useState<boolean>(false);
 
   const expenses = useSelector(expensesSelector)
-    .filter(exp => exp.expenseTypeId === expenseType.id);
+    .filter(exp => exp.expense_type_id === expenseType.id);
 
   const totalSpent = expenses.reduce((acc: number, curr) => {
     return acc + curr.amount;

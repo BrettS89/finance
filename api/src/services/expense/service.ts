@@ -27,14 +27,14 @@ export class ExpenseService implements IService<ExpenseCreate, ExpensePatch, Exp
 
     const created = await db.table(this.tableName).create<ExpenseModel>(data);
 
-    const expenseType = await new ExpenseTypeService().get(created.expenseTypeId);
+    const expenseType = await new ExpenseTypeService().get(created.expense_type_id);
 
     if (!expenseType) {
       throw new BadRequestError('No expense type found with this id');
     }
 
     const expenses = (await db.table(this.tableName).find<ExpenseModel>())
-      .filter(expense => expense.expenseTypeId === expenseType.id);
+      .filter(expense => expense.expense_type_id === expenseType.id);
 
     const total = expenses.reduce((acc, curr) => {
       return acc + curr.amount;
@@ -77,10 +77,10 @@ export class ExpenseService implements IService<ExpenseCreate, ExpensePatch, Exp
   async delete(id: string) {
     const removed = await db.table(this.tableName).remove<ExpenseModel>(id);
 
-    const expenseType = await new ExpenseTypeService().get(removed.expenseTypeId) as any;
+    const expenseType = await new ExpenseTypeService().get(removed.expense_type_id) as any;
 
     const expenses = (await db.table(this.tableName).find<ExpenseModel>())
-      .filter(expense => expense.expenseTypeId === expenseType.id);
+      .filter(expense => expense.expense_type_id === expenseType.id);
 
     const total = expenses.reduce((acc, curr) => {
       return acc + curr.amount;
