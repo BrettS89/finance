@@ -6,7 +6,7 @@ export const styles = {
     flexDirection: 'column' as const,
     // width: '100%',
     height: '100%',
-    padding: 15,
+    padding: 12,
   },
   mainHeader: {
     textAlign: 'center' as const,
