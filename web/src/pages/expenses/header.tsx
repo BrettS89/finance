@@ -20,7 +20,7 @@ export const ExpensesHeader = () => {
   }
 
   return (
-    <div style={styles.cardShadow}>
+    <div style={styles.headerShadow}>
       <div style={styles.cardContainer}>
         <div style={styles.mainHeader}>
           <TbCurrencyDollar style={{ fontWeight: 700, fontSize: 34, color: colors.green }} />

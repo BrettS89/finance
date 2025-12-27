@@ -17,6 +17,13 @@ export const styles = {
     paddingBottom: 5,
     alignItems: 'center' as const
   },
+  headerShadow: {
+    borderRadius: 16,
+    overflow: "visible",
+    background: "transparent",
+    boxShadow: '0 1.5px 5px rgba(0,0,0,0.12), 0 1px 3px rgba(0,0,0,0.18)',
+    marginBottom: 18,
+  },
   header: {
     display: 'flex',
     justifyContent: 'space-between',
