@@ -15,7 +15,7 @@ export class PostgresCrud {
     this.db = db;
   }
 
-  async getById<T>(id: number | string): Promise<T | null> {
+  async getById<T>(id: number | string | bigint): Promise<T | null> {
     const sql = `SELECT * FROM ${this.name} WHERE id = $1`;
 
     const res = await this.db.query(sql, [id]);
@@ -52,7 +52,7 @@ export class PostgresCrud {
     return res.rows[0] as T;
   }
 
-  async findByIdAndUpdate<T>(id: number | string, data: Record<string, any>): Promise<T | null> {
+  async findByIdAndUpdate<T>(id: number | string | bigint, data: Record<string, any>): Promise<T | null> {
     const keys: string[] = [];
     const values: any[] = []; 
 
@@ -70,7 +70,7 @@ export class PostgresCrud {
     return res.rows[0] as T ?? null;
   }
 
-  async remove<T>(id: number | string): Promise<T | null> {
+  async remove<T>(id: number | string | bigint): Promise<T | null> {
     const sql = `DELETE FROM ${this.name} WHERE id = $1 RETURNING *`;
 
     const res = await this.db.query(sql, [id]);

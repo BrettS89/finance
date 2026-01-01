@@ -75,3 +75,14 @@ export class InternalServerError extends CustomError {
     Object.setPrototypeOf(this, BadRequestError.prototype);
   }
 }
+
+export class ServiceUnavailableError extends CustomError {
+  error = 'Service Unavailable';
+  statusCode = 503;
+
+  constructor(public message: string) {
+    super(message);
+
+    Object.setPrototypeOf(this, BadRequestError.prototype);
+  }
+}

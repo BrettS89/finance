@@ -3,6 +3,7 @@ config();
 import { initApp } from './app';
 import { postgres } from './storage/db/postgres/db';
 import { validateEnvironmentVariables } from './config/environment-variables';
+import { startCrons } from './cron';
 
 const run = async () => {
   validateEnvironmentVariables();
@@ -37,6 +38,8 @@ const run = async () => {
 
     await fastify.listen({ port: Number(process.env.PORT), host: '0.0.0.0' });
     console.log(`Server running on port ${process.env.PORT}`);
+
+    startCrons(postgres.pool);
   } catch(e) {
     console.error('Caught error:', e);
     // if (fastify && fastify.log) fastify.log.error(e);

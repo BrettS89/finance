@@ -20,7 +20,6 @@ export const createExpenseEndpoint: RegisterEndpoint = ({ route, fastify }) => {
     handler: async (request, reply) => {
       const pgCrud = new PostgresCrud(fastify.db.pool, TABLES.EXPENSES);
       const expense = await pgCrud.create<ExpenseRow>(request.body);
-      console.log('wtf', expense);
       const response = toExpenseDto(expense);
       reply.status(201).send(response);
     }
