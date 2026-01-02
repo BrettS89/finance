@@ -14,4 +14,13 @@ const sdk = new NodeSDK({
     ],
 });
 
-sdk.start();
+export function startTracing(): Promise<void> {
+  return new Promise((resolve, reject) => {
+    try {
+      sdk.start();
+      resolve();
+    } catch (e) {
+      reject(e);
+    }
+  });
+}
