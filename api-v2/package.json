@@ -9,7 +9,7 @@
   "scripts": {
     "migrate": "node-pg-migrate",
     "migrate:up": "ts-node scripts/migration/up.ts",
-    "migrate:up:prod": "node dist/scripts/migration/up.js",
+    "migrate:up:prod": "DATABASE_URL=\"$DATABASE_URL\" node-pg-migrate up",
     "migrate:down": "ts-node scripts/migration/down.ts",
     "seed:local": "ts-node scripts/seed-local.ts",
     "dev": "ts-node-dev src/index.ts",
