@@ -20,4 +20,4 @@ COPY --from=build /app/dist ./dist
 USER node
 
 # Run migrations then start app
-CMD ["sh", "-c", "npm run migrate:up:prod && exec npm start"]
+CMD ["sh", "-c", "npm run migrate:up && exec npm start"]
