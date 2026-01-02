@@ -14,7 +14,6 @@ export const deleteExpenseEndpoint: RegisterEndpoint = ({ route, fastify }) => {
       },
     },
     handler: async (request, reply) => {
-      console.log('INNNN');
       const expenseService = new ExpenseService(fastify.db.pool);
       const deletedExpense = await expenseService.deleteExpense(request.params.id);
       const response = toExpenseDto(deletedExpense);

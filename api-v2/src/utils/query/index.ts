@@ -27,7 +27,6 @@ const getPrefix = (field: string, prefixMap: Record<string, string>): string =>
     : '';
 
 export const generateSqlAndParams = (props: GenerateQueryProps): { sql: string; values: any[] } => {
-  console.log(JSON.stringify(props.filter))
   const prefixMap = props.prefixMap ?? {};
 
   const queryObject = props.filter;
@@ -145,8 +144,6 @@ export const generateSqlAndParams = (props: GenerateQueryProps): { sql: string; 
   // Construct SQL query
   const whereClause = where.length ? `WHERE ${where.join(' AND ')}` : '';
   const sql = `${props.sqlString} ${whereClause} ${orderBy} ${limit} ${offset}`.trim();
-
-  console.log(sql, values);
   
   return {
     sql,
