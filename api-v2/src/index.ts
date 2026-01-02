@@ -10,10 +10,10 @@ const run = async () => {
 
   try {
     await postgres.connect({
-      host: process.env.PG_HOST,
-      port: Number(process.env.PG_PORT),
-      user: process.env.PG_USER,
-      password: process.env.PG_PASSWORD,
+      host: process.env.PGHOST,
+      port: Number(process.env.PGPORT),
+      user: process.env.PGUSER,
+      password: process.env.PGPASSWORD,
       database: process.env.PG_DATABASE,
     });
 

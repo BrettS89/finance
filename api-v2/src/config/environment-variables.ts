@@ -2,15 +2,13 @@ import Ajv, { JSONSchemaType } from 'ajv';
 
 type EnvVars = {
   ENVIRONMENT: 'local' | 'dev' | 'prod';
-  PORT: number;
-  PG_HOST: string;
-  PG_PORT: number;
-  PG_USER: string;
-  PG_PASSWORD: string;
+  PORT?: number;
+  PGHOST: string;
+  PGPORT: number;
+  PGUSER: string;
+  PGPASSWORD: string;
   PG_DATABASE: string;
-  POSTGRES_URL?: string;
-  JWT_SECRET: string;
-  API_KEY_PEPPER: string
+  DATABASE_URL?: string;
 };
 
 const schema: JSONSchemaType<EnvVars> = {
@@ -18,29 +16,16 @@ const schema: JSONSchemaType<EnvVars> = {
   additionalProperties: false,
   properties: {
     ENVIRONMENT: { type: 'string', enum: ['local', 'dev', 'prod'] },
-    PORT: { type: 'integer', minimum: 1, maximum: 65535 },
-    PG_HOST: { type: 'string', minLength: 1 },
-    PG_PORT: { type: 'integer', minimum: 1, maximum: 65535 },
-    PG_USER: { type: 'string', minLength: 1 },
-    PG_PASSWORD: { type: 'string', minLength: 1 },
+    PORT: { type: 'number', nullable: true, minimum: 1, maximum: 65535, multipleOf: 1 },
+    PGHOST: { type: 'string', minLength: 1 },
+    PGPORT: { type: 'number', minimum: 1, maximum: 65535, multipleOf: 1 },
+    PGUSER: { type: 'string', minLength: 1 },
+    PGPASSWORD: { type: 'string', minLength: 1 },
     PG_DATABASE: { type: 'string', minLength: 1 },
-    POSTGRES_URL: { type: 'string', nullable: true, minLength: 1 },
-    JWT_SECRET: { type: 'string', minLength: 32 },
-    API_KEY_PEPPER: { type: 'string' },
+    DATABASE_URL: { type: 'string', nullable: true, minLength: 1 },
   },
-  required: [
-    'ENVIRONMENT',
-    'PORT',
-    'PG_HOST',
-    'PG_PORT',
-    'PG_USER',
-    'PG_PASSWORD',
-    'PG_DATABASE',
-    'JWT_SECRET',
-    'API_KEY_PEPPER',
-  ],
+  required: ['ENVIRONMENT', 'PGHOST', 'PGPORT', 'PGUSER', 'PGPASSWORD', 'PG_DATABASE'],
 };
-
 export function validateEnvironmentVariables(): Readonly<EnvVars> {
   const ajv = new Ajv({ allErrors: true, coerceTypes: true });
 
@@ -49,14 +34,12 @@ export function validateEnvironmentVariables(): Readonly<EnvVars> {
   const data: Record<string, unknown> = {
     ENVIRONMENT: process.env.ENVIRONMENT,
     PORT: process.env.PORT,
-    PG_HOST: process.env.PG_HOST,
-    PG_PORT: process.env.PG_PORT,
-    PG_USER: process.env.PG_USER,
-    PG_PASSWORD: process.env.PG_PASSWORD,
+    PGHOST: process.env.PG_HOST,
+    PGPORT: process.env.PG_PORT,
+    PGUSER: process.env.PG_USER,
+    PGPASSWORD: process.env.PG_PASSWORD,
     PG_DATABASE: process.env.PG_DATABASE,
-    POSTGRES_URL: process.env.POSTGRES_URL,
-    JWT_SECRET: process.env.JWT_SECRET,
-    API_KEY_PEPPER: process.env.API_KEY_PEPPER,
+    DATABASE_URL: process.env.POSTGRES_URL,
   };
 
   const ok = validate(data);
