@@ -6,8 +6,6 @@ const sdk = new opentelemetry.NodeSDK({
     traceExporter: new OTLPTraceExporter(),
     instrumentations: [
         getNodeAutoInstrumentations({
-            // we recommend disabling fs autoinstrumentation since it can be noisy
-            // and expensive during startup
             '@opentelemetry/instrumentation-fs': {
                 enabled: false,
             },
