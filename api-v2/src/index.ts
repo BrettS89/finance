@@ -1,5 +1,6 @@
-import { config } from 'dotenv';
-config();
+if (process.env.ENVIRONMENT === 'local') {
+  require('dotenv').config();
+}
 import { initApp } from './app';
 import { postgres } from './storage/db/postgres/db';
 import { validateEnvironmentVariables } from './config/environment-variables';
