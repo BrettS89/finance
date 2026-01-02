@@ -9,6 +9,7 @@ const sdk = new NodeSDK({
             '@opentelemetry/instrumentation-fs': {
                 enabled: false,
             },
+            '@opentelemetry/instrumentation-pg': { enabled: false },
         }),
     ],
 });
