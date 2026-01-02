@@ -1,7 +1,7 @@
-import { PostgresCrud } from '../../../storage/db/postgres/crud';
-import { TABLES } from '../../../storage/db/postgres/tables';
 import { RegisterEndpoint } from '../../../types/api';
-import { ExpenseRow } from '../types/expense.row';
+import { toExpenseDto } from '../expense.mappers';
+import { createExpenseSchema, expenseResponseSchema } from '../expense.validators';
+import { ExpenseService } from '../expense.service';
 
 export const deleteExpenseEndpoint: RegisterEndpoint = ({ route, fastify }) => {
   fastify.route<{ Params: { id: string } }>({
@@ -10,13 +10,15 @@ export const deleteExpenseEndpoint: RegisterEndpoint = ({ route, fastify }) => {
     schema: {
       tags: ['expense'],
       response: {
-        204: { type: 'null' },
+        200: expenseResponseSchema,
       },
     },
     handler: async (request, reply) => {
-      const pgCrud = new PostgresCrud(fastify.db.pool, TABLES.EXPENSES);
-      await pgCrud.remove<ExpenseRow>(request.params.id);
-      reply.status(204).send();
+      console.log('INNNN');
+      const expenseService = new ExpenseService(fastify.db.pool);
+      const deletedExpense = await expenseService.deleteExpense(request.params.id);
+      const response = toExpenseDto(deletedExpense);
+      reply.status(200).send(response);
     }
   });
 };

@@ -62,7 +62,7 @@ export class ExpenseService {
     }
   }
 
-  async deleteExpense(expenseId: bigint) {
+  async deleteExpense(expenseId: string) {
     const client = await this.db.connect();
     
     try {

@@ -55,6 +55,7 @@ export const initApp = async () => {
 
   await fastify.register(cors, {
     origin: true, // 👈 reflect request origin
+    methods: ['GET','POST','PUT','PATCH','DELETE','OPTIONS'],
   })
 
   fastify.addHook('onRequest', async (req, _reply) => {
