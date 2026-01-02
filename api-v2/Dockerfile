@@ -21,4 +21,4 @@ COPY --from=build /app/migrations ./migrations
 USER node
 
 # Run migrations then start app
-CMD ["sh", "-c", "node -e \"console.log({PGHOST:process.env.PGHOST,PGPORT:process.env.PGPORT,PGUSER:process.env.PGUSER,PGPASSWORD:!!process.env.PGPASSWORD,DB:process.env.DATABASE_URL})\"; npm run migrate:up && exec npm start"]
+CMD ["sh", "-c", "npm run migrate:up && exec npm start"]

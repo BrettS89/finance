@@ -34,12 +34,12 @@ export function validateEnvironmentVariables(): Readonly<EnvVars> {
   const data: Record<string, unknown> = {
     ENVIRONMENT: process.env.ENVIRONMENT,
     PORT: process.env.PORT,
-    PGHOST: process.env.PG_HOST,
-    PGPORT: process.env.PG_PORT,
-    PGUSER: process.env.PG_USER,
-    PGPASSWORD: process.env.PG_PASSWORD,
+    PGHOST: process.env.PGHOST,
+    PGPORT: process.env.PGPORT,
+    PGUSER: process.env.PGUSER,
+    PGPASSWORD: process.env.PGPASSWORD,
     PG_DATABASE: process.env.PG_DATABASE,
-    DATABASE_URL: process.env.POSTGRES_URL,
+    DATABASE_URL: process.env.DATABASE_URL,
   };
 
   const ok = validate(data);
