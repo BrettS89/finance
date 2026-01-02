@@ -8,10 +8,8 @@
   "main": "index.js",
   "scripts": {
     "migrate": "node-pg-migrate",
-    "migrate:up": "ts-node scripts/migration/up.ts",
-    "migrate:up:prod": "DATABASE_URL=\"$DATABASE_URL\" node-pg-migrate up",
-    "migrate:down": "ts-node scripts/migration/down.ts",
-    "seed:local": "ts-node scripts/seed-local.ts",
+    "migrate:up": "node-pg-migrate up",
+    "migrate:down": "node-pg-migrate down",
     "dev": "ts-node-dev src/index.ts",
     "clean": "rimraf dist",
     "build": "npm run clean && tsc",
