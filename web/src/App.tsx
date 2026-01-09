@@ -43,6 +43,10 @@ function App() {
         // events,
         budgets,
       ] = await Promise.all(promises);
+
+      console.log(expenseTypes);
+      console.log(expenses);
+      console.log(surplus);
   
       dispatch(expenseTypesFetched(expenseTypes));
       dispatch(expensesFetched(expenses));

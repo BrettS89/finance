@@ -19,7 +19,7 @@ export const listExpensesEndpoint: RegisterEndpoint = ({ route, fastify }) => {
       const pgCrud = new PostgresCrud(fastify.db.pool, TABLES.EXPENSES);
       const expenses = await pgCrud.find<ExpenseRow>();
       const response = expenses.map(toExpenseDto);
-      reply.status(200).send(response);
+      return response;
     }
   });
 };

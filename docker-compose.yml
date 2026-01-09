@@ -9,7 +9,7 @@ services:
     depends_on:
       - finance-pg
     env_file:
-      - ./api/.env
+      - ./api-v2/.env
     ports:
       - "4004:4004"
     restart: unless-stopped
