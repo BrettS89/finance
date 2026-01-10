@@ -1,4 +1,3 @@
-import { PostgresCrud } from '../../../storage/db/postgres/crud';
 import { RegisterEndpoint } from '../../../types/api';
 import { TABLES } from '../../../storage/db/postgres/tables';
 import { expenseResponseSchema } from '../expense.validators';
@@ -16,9 +15,14 @@ export const listExpensesEndpoint: RegisterEndpoint = ({ route, fastify }) => {
       },
     },
     handler: async (_, reply) => {
-      const pgCrud = new PostgresCrud(fastify.db.pool, TABLES.EXPENSES);
-      const expenses = await pgCrud.find<ExpenseRow>();
-      const response = expenses.map(toExpenseDto);
+      const result = await fastify.db.pool.query<ExpenseRow>(`
+        SELECT *
+        FROM ${TABLES.EXPENSES}
+        ORDER BY id ASC
+      `);
+
+      const response = result.rows.map(toExpenseDto);
+
       return response;
     }
   });
