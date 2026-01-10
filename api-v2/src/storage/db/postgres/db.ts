@@ -7,7 +7,7 @@ export class Postgres {
     this._pool = new pg.Pool({
       ...options,
       max: 10,
-      connectionTimeoutMillis: 500,
+      connectionTimeoutMillis: 5_000,
       idleTimeoutMillis: 30_000,
     });
     return this._pool.query('SELECT 1 + 1');
