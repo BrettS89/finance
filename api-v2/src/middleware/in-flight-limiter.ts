@@ -17,8 +17,8 @@ const ingestConcurrency: FastifyPluginAsync<Opts> = async (fastify, opts) => {
       reply
         .code(503)
         .header('Retry-After', String(retryAfter))
-        .send({ error: 'Server is busy, retry later' });
-      return;
+      
+      return { error: 'Server is busy, retry later' };
     }
 
     inFlight += 1;

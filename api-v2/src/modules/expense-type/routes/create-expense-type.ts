@@ -21,7 +21,8 @@ export const createExpenseTypeEndpoint: RegisterEndpoint = ({ route, fastify }) 
       const pgCrud = new PostgresCrud(fastify.db.pool, TABLES.EXPENSE_TYPES);
       const expenseType = await pgCrud.create<ExpenseTypeRow>(request.body);
       const response = toExpenseTypeDto(expenseType);
-      reply.status(201).send(response);
+      reply.status(201);
+      return response;
     }
   });
 };

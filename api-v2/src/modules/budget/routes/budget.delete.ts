@@ -16,7 +16,7 @@ export const deleteBudgetEndpoint: RegisterEndpoint = ({ route, fastify }) => {
     handler: async (request, reply) => {
       const pgCrud = new PostgresCrud(fastify.db.pool, TABLES.BUDGETS);
       await pgCrud.remove<BudgetRow>(request.params.id);
-      reply.status(204).send();
+      reply.status(204);
     }
   });
 };

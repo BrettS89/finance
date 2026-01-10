@@ -25,7 +25,8 @@ export const getSurplusEndpoint: RegisterEndpoint = ({ route, fastify }) => {
         throw new NotFoundError('No surplus was found');
       }
 
-      reply.status(200).send(surplus);
+      reply.status(200);
+      return surplus;
     }
   });
 };

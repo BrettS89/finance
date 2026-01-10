@@ -19,7 +19,8 @@ export const createExpenseEndpoint: RegisterEndpoint = ({ route, fastify }) => {
       const expenseService = new ExpenseService(fastify.db.pool);
       const createdExpense = await expenseService.createExpense(request.body);
       const response = toExpenseDto(createdExpense);
-      reply.status(201).send(response);
+      reply.status(201);
+      return response;
     }
   });
 };

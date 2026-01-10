@@ -19,7 +19,8 @@ export const createSurplusEndpoint: RegisterEndpoint = ({ route, fastify }) => {
     handler: async (request, reply) => {
       const pgCrud = new PostgresCrud(fastify.db.pool, TABLES.SURPLUS);
       const surplus = await pgCrud.create<SurplusRow>(request.body);
-      reply.status(201).send(surplus);
+      reply.status(201);
+      return surplus;
     }
   });
 };

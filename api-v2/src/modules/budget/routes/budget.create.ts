@@ -21,7 +21,8 @@ export const createBudgetEndpoint: RegisterEndpoint = ({ route, fastify }) => {
       const pgCrud = new PostgresCrud(fastify.db.pool, TABLES.BUDGETS);
       const budget = await pgCrud.create<BudgetRow>(request.body);
       const response = toBudgetDto(budget);
-      reply.status(201).send(response);
+      reply.status(201);
+      return response;
     }
   });
 };

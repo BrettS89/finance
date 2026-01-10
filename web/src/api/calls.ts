@@ -47,13 +47,10 @@ export const deleteExpenseType = async (id: string) => {
 // expenses
 
 export const fetchExpenses = async () => {
-  const { data, status } = await http({
+  const { data } = await http({
     url: '/expense',
     method: 'GET',
   });
-
-  console.log(status);
-  console.log(data);
 
   return data;
 };
