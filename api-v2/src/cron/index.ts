@@ -1,13 +1,14 @@
 import { Pool } from 'pg';
 import { CronJob } from 'cron';
-import { PostgresCrud } from '../storage/db/postgres/crud';
 import { TABLES } from '../storage/db/postgres/tables';
 import { ExpenseTypeRow } from '../modules/expense-type/types/expense-type.row';
 import { ExpenseRow } from '../modules/expense/types/expense.row';
 
 const deleteExpenses = async (db: Pool, frequency: 'week' | 'month' | 'year') => {
-  const expenseTypeCrud = new PostgresCrud(db, TABLES.EXPENSE_TYPES);
-  const expenseTypes = await expenseTypeCrud.find<ExpenseTypeRow>({ frequency });
+  const { rows: expenseTypes } = await db.query<ExpenseTypeRow>(`
+    SELECT * FROM ${TABLES.EXPENSE_TYPES};
+    WHERE frequency = $1
+  `, [frequency]);
 
   if (!expenseTypes.length) return;
 
@@ -20,8 +21,9 @@ const deleteExpenses = async (db: Pool, frequency: 'week' | 'month' | 'year') =>
     return acc;
   }, {});
 
-  const expenseCrud = new PostgresCrud(db, TABLES.EXPENSES);
-  const expenses = await expenseCrud.find<ExpenseRow>();
+  const { rows: expenses } = await db.query<ExpenseRow>(`
+    SELECT * FROM ${TABLES.EXPENSES}
+  `);
 
   let spent = 0;
 
