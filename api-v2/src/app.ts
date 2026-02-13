@@ -11,6 +11,7 @@ import { postgres } from './storage/db/postgres/db';
 import { errorHandler } from './middleware/error-handler';
 import { addFormatServiceParamsHook } from './middleware/format-params';
 import inFlightLimiter from './middleware/in-flight-limiter';
+import { goldenMetricsPlugin } from './middleware/metrics';
 
 import { registerExpenseTypeRoutes } from './modules/expense-type';
 import { registerExpenseRoutes } from './modules/expense';
@@ -56,7 +57,7 @@ export const initApp = async () => {
   await fastify.register(cors, {
     origin: true, // 👈 reflect request origin
     methods: ['GET','POST','PUT','PATCH','DELETE','OPTIONS'],
-  })
+  });
 
   fastify.addHook('onRequest', async (req, _reply) => {
     req.log.info({ id: req.id, method: req.method, url: req.url, ip: req.ip }, 'request start');
@@ -93,6 +94,8 @@ export const initApp = async () => {
     staticCSP: true,
     transformSpecificationClone: true
   });
+
+  fastify.register(goldenMetricsPlugin);
 
   fastify.register(async (inFlightLimiterScope) => {
     inFlightLimiterScope.register(inFlightLimiter, { maxInFlight: 20, retryAfterSeconds: 5 });

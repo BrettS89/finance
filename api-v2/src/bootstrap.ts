@@ -1,7 +1,7 @@
-import { startTracing } from './tracing';
+import { runObservability } from './observabililty';
 
 async function main() {
-  await startTracing();     // 1) instrumentation is installed
+  await runObservability();     // 1) instrumentation is installed
   require('./index');       // 2) now run your real app entrypoint (same as node index.js)
 }
 
