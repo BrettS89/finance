@@ -40,7 +40,7 @@ const sdk = new NodeSDK({
   metricReader,
   instrumentations: [
     new HttpInstrumentation(),
-    new ExpressInstrumentation(),
+    // new ExpressInstrumentation(),
     getNodeAutoInstrumentations()
   ],
 });
