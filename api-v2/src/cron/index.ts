@@ -6,7 +6,7 @@ import { ExpenseRow } from '../modules/expense/types/expense.row';
 
 const deleteExpenses = async (db: Pool, frequency: 'week' | 'month' | 'year') => {
   const { rows: expenseTypes } = await db.query<ExpenseTypeRow>(`
-    SELECT * FROM ${TABLES.EXPENSE_TYPES};
+    SELECT * FROM ${TABLES.EXPENSE_TYPES}
     WHERE frequency = $1
   `, [frequency]);
 
