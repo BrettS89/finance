@@ -39,6 +39,7 @@ function routeLabel(req: any): string {
  *   fastify.register(goldenMetricsPlugin)
  */
 export const goldenMetricsPlugin: FastifyPluginCallback = (fastify, _opts, done) => {
+  console.log('GOLDEN METRICS INIT');
   // Runs early for every request
   fastify.addHook('onRequest', async (req) => {
     // store start time on request
