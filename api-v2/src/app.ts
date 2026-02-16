@@ -95,9 +95,9 @@ export const initApp = async () => {
     transformSpecificationClone: true
   });
 
-  await fastify.register(goldenMetricsPlugin);
 
   fastify.register(async (inFlightLimiterScope) => {
+    await inFlightLimiterScope.register(goldenMetricsPlugin);
     inFlightLimiterScope.register(inFlightLimiter, { maxInFlight: 20, retryAfterSeconds: 5 });
 
     // register your ingestion routes here
