@@ -44,7 +44,7 @@ export const goldenMetricsPlugin: FastifyPluginCallback = (fastify, _opts, done)
     // store start time on request
     (req as any).__gmStart = performance.now();
 
-    console.log("IN GOLDEN METRICS MIDDLEWARE");
+    console.log("IN GOLDEN METRICS MIDDLEWARE REQUEST");
 
     const route = routeLabel(req);
     httpInFlight.add(1, { method: req.method, route });
@@ -54,6 +54,9 @@ export const goldenMetricsPlugin: FastifyPluginCallback = (fastify, _opts, done)
   fastify.addHook('onResponse', async (req, reply) => {
     const start = (req as any).__gmStart as number | undefined;
     const dur = typeof start === 'number' ? performance.now() - start : 0;
+
+        console.log("IN GOLDEN METRICS MIDDLEWARE RESPONSE");
+
 
     const sc = statusClass(reply.statusCode);
     const route = routeLabel(req);
