@@ -60,10 +60,13 @@ export const initApp = async () => {
   });
 
   fastify.addHook('onRequest', async (req, _reply) => {
+    console.log('sanity check');
     req.log.info({ id: req.id, method: req.method, url: req.url, ip: req.ip }, 'request start');
   });
 
   fastify.addHook('onResponse', async (req, reply) => {
+        console.log('sanity check2');
+
     req.log.info({ id: req.id, status: reply.statusCode }, 'request complete');
   });
 
