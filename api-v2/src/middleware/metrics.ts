@@ -44,6 +44,8 @@ export const goldenMetricsPlugin: FastifyPluginCallback = (fastify, _opts, done)
     // store start time on request
     (req as any).__gmStart = performance.now();
 
+    console.log("IN GOLDEN METRICS MIDDLEWARE");
+
     const route = routeLabel(req);
     httpInFlight.add(1, { method: req.method, route });
   });
