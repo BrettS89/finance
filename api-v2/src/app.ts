@@ -95,17 +95,17 @@ export const initApp = async () => {
     transformSpecificationClone: true
   });
 
-  fastify.register(goldenMetricsPlugin);
+  await fastify.register(goldenMetricsPlugin);
 
   fastify.register(async (inFlightLimiterScope) => {
     inFlightLimiterScope.register(inFlightLimiter, { maxInFlight: 20, retryAfterSeconds: 5 });
 
     // register your ingestion routes here
     // ingestScope.register(ingestionRoutes);
-    fastify.register(registerExpenseTypeRoutes);
-    fastify.register(registerExpenseRoutes);
-    fastify.register(registerBudgetRoutes);
-    fastify.register(registerSurplusRoutes);
+    inFlightLimiterScope.register(registerExpenseTypeRoutes);
+    inFlightLimiterScope.register(registerExpenseRoutes);
+    inFlightLimiterScope.register(registerBudgetRoutes);
+    inFlightLimiterScope.register(registerSurplusRoutes);
   });
 
   addFormatServiceParamsHook(fastify);
