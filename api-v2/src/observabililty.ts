@@ -24,7 +24,9 @@ const metricExporter = new OTLPMetricExporter({
   url: `${process.env.OTEL_EXPORTER_OTLP_ENDPOINT}/otlp/v1/metrics`,
   // headers: { Authorization: `Bearer ${process.env.INGEST_TOKEN}` }, // if needed
   headers: {
-    'Content-Type': 'application/x-protobuf',
+    // 'Content-Type': 'application/x-protobuf',
+
+    'Content-Type': 'application/json',
     'X-Scope-OrgID': 'brett'
   },
 });
