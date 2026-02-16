@@ -1,5 +1,6 @@
 // fastify-golden-metrics.ts
 import type { FastifyPluginCallback } from 'fastify';
+import fp from 'fastify-plugin';
 import { performance } from 'node:perf_hooks';
 import {
   httpRequestsTotal,
@@ -38,7 +39,7 @@ function routeLabel(req: any): string {
  * Usage:
  *   fastify.register(goldenMetricsPlugin)
  */
-export const goldenMetricsPlugin: FastifyPluginCallback = (fastify, _opts, done) => {
+export const goldenMetricsPlugin = fp((fastify, _opts, done) => {
   console.log('GOLDEN METRICS INIT');
   // Runs early for every request
   fastify.addHook('onRequest', async (req) => {
@@ -91,7 +92,7 @@ export const goldenMetricsPlugin: FastifyPluginCallback = (fastify, _opts, done)
   });
 
   done();
-};
+});
 
 // Event loop lag sampler (same as your Express version)
 export function startEventLoopLagSampler(intervalMs = 1000) {
