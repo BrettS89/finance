@@ -25,7 +25,6 @@ const metricExporter = new OTLPMetricExporter({
   // headers: { Authorization: `Bearer ${process.env.INGEST_TOKEN}` }, // if needed
   headers: {
     // 'Content-Type': 'application/x-protobuf',
-
     'Content-Type': 'application/json',
     'X-Scope-OrgID': 'brett'
   },
@@ -47,10 +46,10 @@ const sdk = new NodeSDK({
   ],
 });
 
-export function runObservability(): Promise<void> {
-  return new Promise((resolve, reject) => {
+export const runObservability = async (): Promise<void> => {
+  return new Promise(async (resolve, reject) => {
     try {
-      sdk.start();
+      await sdk.start();
       resolve();
     } catch (e) {
       reject(e);
