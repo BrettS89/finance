@@ -100,12 +100,6 @@ export const initApp = async () => {
 
   await fastify.register(goldenMetricsPlugin);
 
-  fastify.get('/test-err', (_req, _reply) => {
-    throw new Error('test error for observability');
-
-    return { message: 'ok' };
-  });
-
   fastify.register(async (inFlightLimiterScope) => {
     inFlightLimiterScope.register(inFlightLimiter, { maxInFlight: 20, retryAfterSeconds: 5 });
 

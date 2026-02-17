@@ -23,4 +23,13 @@ export const listExpenseTypeEndpoint: RegisterEndpoint = ({ route, fastify }) =>
       return response;
     }
   });
+
+  fastify.route({
+    method: 'GET',
+    url: '/test-error',
+    handler: async (_, reply) => {
+      throw new Error('test error');
+      return { message: 'ok' };
+    },
+  });
 };
