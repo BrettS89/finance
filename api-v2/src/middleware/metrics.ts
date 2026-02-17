@@ -40,19 +40,10 @@ function routeLabel(req: any): string {
  *   fastify.register(goldenMetricsPlugin)
  */
 export const goldenMetricsPlugin = fp((fastify, _opts, done) => {
-  console.log('GOLDEN METRICS INIT');
   // Runs early for every request
   fastify.addHook('onRequest', async (req) => {
     // store start time on request
-        console.log("IN GOLDEN METRICS MIDDLEWARE REQUEST");
-
-    try {
-      (req as any).__gmStart = performance.now();
-    } catch(e) {
-      console.log(e)
-      throw e;
-    }
-
+    (req as any).__gmStart = performance.now();
 
     const route = routeLabel(req);
     httpInFlight.add(1, { method: req.method, route });
@@ -62,9 +53,6 @@ export const goldenMetricsPlugin = fp((fastify, _opts, done) => {
   fastify.addHook('onResponse', async (req, reply) => {
     const start = (req as any).__gmStart as number | undefined;
     const dur = typeof start === 'number' ? performance.now() - start : 0;
-
-        console.log("IN GOLDEN METRICS MIDDLEWARE RESPONSE");
-
 
     const sc = statusClass(reply.statusCode);
     const route = routeLabel(req);
